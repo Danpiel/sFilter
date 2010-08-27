@@ -1,0 +1,8 @@
+## Interface: 30300
+## Title: |cffff00ffs|r|cffffffffFilter|r
+## Notes: Filtert ein paar Dinge... :P
+## Author: Nils Ruesch
+## Version: 090219
+
+settings.lua
+sFilter.lua
