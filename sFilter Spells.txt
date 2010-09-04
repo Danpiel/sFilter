@@ -1,10 +1,44 @@
+--[[ Closer look at spell lists:
+All classes have their own spell list.
+Each entry in list creates a separate icon. Entry is a table with values in it:
+- spellId - id of spell you want to track. If you don't know it - check wowhead.com - last number in any spell link is spellid (example: http://www.wowhead.com/?spell=55095, id is 55095)
+- spellId2, spellId3, spellId4, spellId5 - optional entries, these are the spellids you want to track if primary spell is NOT active.
+- size - icon size in pixels
+- unitId - unit at which you wish to track selected spell(s). More info: http://www.wowwiki.com/UnitId
+- isMine - this is filter. isMine = 1 means only  effects from units in MyUnits table will be shown (see below for this table. Note: isMine = "1" will NOT work, it should be number, not string. Any other value will show effect from any source
+- filter - filter again =). Needs to be "HELPFUL" for buffs and "HARMFUL" for debuffs.
+- setPoint - where to place the icon. It's a table with coordinates inside. More info: http://www.wowwiki.com/API_Region_SetPoint
+Original addon version: http://toxila.googlecode.com/svn/zips/sFilter/
+]]
+
+--[[ PVP Section
+This is a list of bufs on targets i.e. Shild Wall or Bubble, there will be three icons, first will be major safe ablities (Ice Block, Icebond Fortitude), second is safe abilities from another player (Blessing of protection, Antimagic zone)
+and third wiil be minor buffs (Blessing of Freedom, Stoneclaw totem)
+
+Spells will be added by slot of priority
+
+All icons 64 size
+
+-- Add this list to your character class
+
+PVP Spells = {
+	-- Major Safe abilities: Icebond Fortitude(DK), Anti-magic shield (DK), Divine Protection(PAL), Divine Protection(PAL), Dispersion(PRIEST), Ice Block(MAGE), Dettrence(HUNTER), Spell Reflect(WAR), Shield Wall(WAR), Barkskin(DRU), Survival Instincts(DRU), Cloack of Shadows(ROG), Evasion(ROG), Sacrifice(LOCK Pet), Shamanistic Rage(SHA), The Beast Within(HUNT)
+	{spellId = 48792, spellId2 = 48707, spellId3 = 498, spellId4 = 642, spellId5 = 47585, spellId6 = 45438 size = 64, spellId7 = 19263, spellId8 = 23920, spellId9 = 871, spellId10 = 22812, spellId11 = 61336, spellId12 = 31224, spellId13 = 26669, spellId14 = 47986, spellId15 = 30823, spellid16 = 34471, unitId = "target", isMine = all, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", -148, 37}},
+	-- Shareable safe abilities: Anti-magic zone(DK), Hand of Protection(PAL), Hand of Sacriface(PAL), Aura Mastery(PAL), Divine Sacriface(PAL), Guardian Spirit(PRIEST), Pain Suppression(PRIEST), Intervene(WAR), Hymn of Hope(PRIEST), Tranquility(DRU)
+	{spellId = 50461, spellId2 = 1022, spellId3 = 6940, spellId4 = 31821, spellId5 = 64205, spellId6 = 47788, spellId7 = 33206, spellId8 = 3411, spellId9 = 64901, spellId10 = 48447, size = 64, unitId = "target", isMine = all, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", -222, 37}},
+	-- Minor safe abilities: Hand of Freedom(PAL), Divine Hymn(PRIEST), , Ice Barrier(MAGE), Mana Shield(MAGE), Fire Ward(MAGE), Frost Ward(MAGE), Shield Block(WAR), Enraged Regeneration(WAR), Frenzied Regeneration(DRU), Shadow Ward(LOCK), Stoneclaw Totem(SHA)
+	{spellId = 1044, spellId2 = 64843, spellId3 = 43039, spellId4 = 43020, spellId67= 43010, spellId8 = 43012, spellId9 = 2565, spellId10 = 55694, spellId11 = 22842, spellId12 = 47891, spellid13 = 58582, size = 64, unitId = "target", isMine = all, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", -296, 37}},
+
+--]]
+
+sFilter_Spells = {
     ["DEATHKNIGHT"] = {
-    -- Frost Fever
-    {spellId = 55095, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
-    -- Blood Plague
-    {spellId = 55078, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
     -- Ebon Plague
-    {spellId = 51726, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
+    {spellId = 51735, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
+    -- Frost Fever
+    {spellId = 55095, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
+    -- Blood Plague
+    {spellId = 55078, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
     -- Unholy Blight
     {spellId = 50536, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
 	-- Killing Machine
@@ -17,8 +51,10 @@
 	{spellId = 48792, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 37}},
 	-- Vampiric Blood, Unbreakable Armor, Bone Shield 
 	{spellId = 55233, spellId2 = 51271, spellId3 = 49222, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 37}},
+	-- Anti-magic shield and zone
+	{spellId = 48707, spellId2 = 50461, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
 	-- Tanking 4t10 bonus proc (Blood armor)
-	{spellId = 70654, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
+	{spellId = 70654, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 74}},
     },
     ["DRUID"] = {
     -- Insect Swarm
@@ -27,11 +63,11 @@
     {spellId = 26988, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 280, 0}},
     -- Entangling Roots
     {spellId = 26989, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 317, 0}},
-    -- Earth and Moon
-    {spellId = 48511, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
+    -- Earth and Moon, Ebon Plague, CoE
+    {spellId = 48511, spellId2 = 51735, spellId3 = 47865, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
     -- Eclipse
-    {spellId = 48525, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"LEFT", UIParent, "CENTER", 85, -80}},
-	 -- Lacerate
+    {spellId = 48525, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 85, 0}},
+	-- Lacerate
     {spellId = 48568, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
     -- Rake
     {spellId = 48574, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
@@ -40,11 +76,11 @@
     -- Mangle
     {spellId = 48566, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
     -- Barkskin
-    {spellId = 22812, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", -132, 0}},
+    {spellId = 22812, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 37}},
     -- Survival Instincts
-    {spellId = 61336, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", -169, 0}},
+    {spellId = 61336, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 37}},
     -- Savage roar
-    {spellId = 52610, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", -95, 0}},
+    {spellId = 52610, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 37}},
     },
     ["HUNTER"] = { -- by haylie from wowinterface.com
     -- Hunter's Mark
@@ -107,24 +143,37 @@
     --    {spellId = 48168, size = 32, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 37}},
     -- PW:Shield on self
     {spellId = 48066, size = 32, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 37}},
-	-- Serendipity
-	{spellId = 63734, size = 32, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
+	-- Serendipity, Holy Concentration
+	{spellId = 63734, spellId2 = 63725, size = 32, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
     -- Renew on target
     {spellId = 25222, size = 32, unitId = "target", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
     -- PW:Shield on target
     {spellId = 48066, size = 32, unitId = "target", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
-    -- Surge of Light
-    {spellId = 33151, size = 32, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
+    -- Surge of Light, Borrowed Time
+    {spellId = 33151, spellId2 = 59891, size = 32, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
     -- SW:Pain
     {spellId = 48125, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
     -- VT (shadow)
     {spellId = 48160, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
-    -- VE (shadow)
- --   {spellId = 15286, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
+    -- Shadow Weaving
+	{spellId = 15332, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
     -- Devouring Plague
     {spellId = 48300, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
     },
     ["ROGUE"] = {
+	-- Deadly Poison
+    {spellId = 57970, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
+	-- Wound Poison 
+    {spellId = 57975, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
+   	-- Crippling Poison 
+	{spellId = 44289, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
+    -- Mind-numbing Poison
+    {spellId = 41190, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
+	-- Slice and Dice
+	{spellId = 6774, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
+	-- Rupture
+	{spellId = 48672, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},	
+	
     },
     ["SHAMAN"] = {
     -- Hex
@@ -142,8 +191,8 @@
     
     },
     ["WARLOCK"] = {
-    -- CoE, Ebon Plaguebringer, Earth and Moon
-    {spellId = 47865, spellId2 = 51161, spellId3 = 48511, size = 32, unitId = "target", isMine = "all", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
+    -- CoE, Ebon Plague, Earth and Moon
+    {spellId = 47865, spellId2 = 51735, spellId3 = 48511, size = 32, unitId = "target", isMine = "all", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
     -- CoT, CoE, CoW
     {spellId = 11719, spellId2 = 18223, spellId3 = 50511, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
     -- Molten Core(destro), Shadow Trance (afflict)
@@ -188,3 +237,4 @@
     -- Attack power debuff: warrior shout, druid roar, lock curse, paladins vindication
     {spellId = 1160, spellId2 = 48560, spellId3 = 50511, spellId4 = 26017, size = 32, unitId = "target", isMine = "all", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
     }
+}
