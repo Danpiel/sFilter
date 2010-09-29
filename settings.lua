@@ -1,3 +1,19 @@
+-- "true" means enabled, "false" means disabled
+sFilter_Settings = {
+    configmode = false, -- In this mode all icons are shown and can be moved.
+    FontSize = 17,      -- Font size for stacks text
+    r = .8,             -- Text color for stacks text More info: http://www.wowwiki.com/API_FontString_SetTextColor
+    g = .8,
+    b = .8,
+    CountPoint = {"TOP"},            -- Stacks text position. More info: http://www.wowwiki.com/API_Region_SetPoint
+}
+
+--[[ More info about config mode:
+You can move icons with left mouse button while holding Alt OR Shift. Changed position won't be saved between sessions.
+After click on icon you will see in chat info about its position. This can be used to change setPoint attribute is spell list.
+Clicking on icon with right mouse button will reset its position to default.
+]]
+
 --[[ Closer look at spell lists:
 All classes have their own spell list.
 Each entry in list creates a separate icon. Entry is a table with values in it:
@@ -66,7 +82,7 @@ sFilter_Spells = {
     -- Earth and Moon, Ebon Plague, CoE
     {spellId = 48511, spellId2 = 51735, spellId3 = 47865, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
     -- Eclipse
-    {spellId = 48525, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 85, 0}},
+    {spellId = 48525, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"LEFT", UIParent, "CENTER", 85, -80}},
 	-- Lacerate
     {spellId = 48568, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
     -- Rake
@@ -76,39 +92,39 @@ sFilter_Spells = {
     -- Mangle
     {spellId = 48566, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
     -- Barkskin
-    {spellId = 22812, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 37}},
+    {spellId = 22812, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", -132, 0}},
     -- Survival Instincts
-    {spellId = 61336, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 37}},
+    {spellId = 61336, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", -169, 0}},
     -- Savage roar
-    {spellId = 52610, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 37}},
+    {spellId = 52610, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", -95, 0}},
     },
-    ["HUNTER"] = { -- by haylie from wowinterface.com
+    ["HUNTER"] = {
     -- Hunter's Mark
-    {spellId = 53338, size = 32, unitId = "target", isMine = "all", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
+    {spellId = 53338, size = 32, unitId = "target", isMine = "all", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
     -- Serpent Sting
-    {spellId = 49001, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
+    {spellId = 49001, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
     -- Black Arrow
-    {spellId = 63672, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 280, 0}},
+    {spellId = 63672, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
     -- Explosive Shot DoT
-    {spellId = 60053, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 317, 0}},
+    {spellId = 60053, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
     -- Lock and Load
-    {spellId = 56453, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"LEFT", UIParent, "CENTER", 85, 0}},
+    {spellId = 56453, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -54}},
     -- Aspect of the Viper
-    {spellId = 34074, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"LEFT", UIParent, "CENTER", 85, 70}},
+    {spellId = 34074, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -54}},
     },
-    ["MAGE"] = {-- by Zaben from wowinterface.com
+    ["MAGE"] = {
     -- Living Bomb
-    {spellId = 55360, size = 64, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"LEFT", UIParent, "CENTER", 85, -80}},
+    {spellId = 55360, size = 64, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -54}},
     -- Fingers of Frost (Frost), Missile Barrage (Arcane), Hot Streak (Fire)
-    {spellId = 44545, spellId2 = 54490, spellId3 = 44448, size = 64, unitId = "player", isMine = all, filter = "HELPFUL", setPoint = {"LEFT", UIParent, "CENTER", 85, 0}},
+    {spellId = 44545, spellId2 = 54490, spellId3 = 44448, size = 64, unitId = "player", isMine = all, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -54}},
     -- Fireball! 
-    {spellId = 57761, size = 32, unitId = "player", isMine = "all", filter = "HELPFULL", setPoint = {"CENTER", UIParent, "CENTER", 132, 37}},
+    {spellId = 57761, size = 32, unitId = "player", isMine = "all", filter = "HELPFULL", setPoint = {"CENTER", UIParent, "CENTER", 169, 37}},
     -- Clear Casting
-    {spellId = 12536, size = 64, unitId = "player", isMine = all, filter = "HELPFUL", setPoint = {"LEFT", UIParent, "CENTER", 85, -80}},
+    {spellId = 12536, size = 32, unitId = "player", isMine = all, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
     -- Fiery Payback (Rank 1 and 2)
-    {spellId = 44440, spellId2 = 44441, size = 32, unitId = "player", isMine = "all", filter = "HELPFULL", setPoint = {"CENTER", UIParent, "CENTER", 85, 0}},
+    {spellId = 44440, spellId2 = 44441, size = 32, unitId = "player", isMine = "all", filter = "HELPFULL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
     -- Impact
-    {spellId = 12358, size = 32, unitId = "target", isMine = "1", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 37}},
+    {spellId = 12358, size = 32, unitId = "target", isMine = "1", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 37}},
     -- Arcane Blast debuff 
     {spellId = 36032, size = 32, unitId = "player", isMine = "all", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
     -- Spell Crit - Winter's Chill (Frost), Improved Scorch (Fire)
@@ -116,7 +132,7 @@ sFilter_Spells = {
     -- Polymorph - Sheep, Pig, Turkey, Black Cat, Rabbit, Turtle, 
     {spellId = 12826, spellId2 = 28272, spellId3 = 61780, spellId4 = 61305, spellId5 = 61721, spellId6 = 28271, size = 32, unitId = "target", isMine = "1", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 37}},
     -- Slow (Arcane), Ignite (Fire), Frostbite (Frost)
-    {spellId = 31589, spellId2 = 12848, spellId3 = 12497, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 238, 0}},
+    {spellId = 31589, spellId2 = 12848, spellId3 = 12497, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
     },
     ["PALADIN"] = {
     -- Art of War
