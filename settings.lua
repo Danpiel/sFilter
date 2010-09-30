@@ -39,7 +39,7 @@ All icons 64 size
 
 PVP Spells = {
 	-- Major Safe abilities: Icebond Fortitude(DK), Anti-magic shield (DK), Divine Protection(PAL), Divine Protection(PAL), Dispersion(PRIEST), Ice Block(MAGE), Dettrence(HUNTER), Spell Reflect(WAR), Shield Wall(WAR), Barkskin(DRU), Survival Instincts(DRU), Cloack of Shadows(ROG), Evasion(ROG), Sacrifice(LOCK Pet), Shamanistic Rage(SHA), The Beast Within(HUNT)
-	{spellId = 48792, spellId2 = 48707, spellId3 = 498, spellId4 = 642, spellId5 = 47585, spellId6 = 45438 size = 64, spellId7 = 19263, spellId8 = 23920, spellId9 = 871, spellId10 = 22812, spellId11 = 61336, spellId12 = 31224, spellId13 = 26669, spellId14 = 47986, spellId15 = 30823, spellid16 = 34471, unitId = "target", isMine = all, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", -148, 37}},
+	{spellId = 48792, spellId2 = 48707, spellId3 = 498, spellId4 = 642, spellId5 = 47585, spellId6 = 45438, spellId7 = 19263, spellId8 = 23920, spellId9 = 871, spellId10 = 22812, spellId11 = 61336, spellId12 = 31224, spellId13 = 26669, spellId14 = 47986, spellId15 = 30823, spellid16 = 34471, size = 64, unitId = "target", isMine = all, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", -148, 37}},
 	-- Shareable safe abilities: Anti-magic zone(DK), Hand of Protection(PAL), Hand of Sacriface(PAL), Aura Mastery(PAL), Divine Sacriface(PAL), Guardian Spirit(PRIEST), Pain Suppression(PRIEST), Intervene(WAR), Hymn of Hope(PRIEST), Tranquility(DRU)
 	{spellId = 50461, spellId2 = 1022, spellId3 = 6940, spellId4 = 31821, spellId5 = 64205, spellId6 = 47788, spellId7 = 33206, spellId8 = 3411, spellId9 = 64901, spellId10 = 48447, size = 64, unitId = "target", isMine = all, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", -222, 37}},
 	-- Minor safe abilities: Hand of Freedom(PAL), Divine Hymn(PRIEST), , Ice Barrier(MAGE), Mana Shield(MAGE), Fire Ward(MAGE), Frost Ward(MAGE), Shield Block(WAR), Enraged Regeneration(WAR), Frenzied Regeneration(DRU), Shadow Ward(LOCK), Stoneclaw Totem(SHA)
@@ -98,7 +98,7 @@ sFilter_Spells = {
     -- Savage roar
     {spellId = 52610, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", -95, 0}},
     },
-    ["HUNTER"] = {
+    ["HUNTER"] = { -- by haylie from wowinterface.com
     -- Hunter's Mark
     {spellId = 53338, size = 32, unitId = "target", isMine = "all", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
     -- Serpent Sting
@@ -153,6 +153,14 @@ sFilter_Spells = {
     -- Attack power debuff: warrior shout, druid roar, lock curse, paladins vindication
     {spellId = 1160, spellId2 = 48560, spellId3 = 50511, spellId4 = 26017, size = 32, unitId = "target", isMine = "all", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
  
+ 
+ 	-- Major Safe abilities: Icebond Fortitude(DK), Anti-magic shield (DK), Divine Protection(PAL), Divine Shield(PAL), Dispersion(PRIEST), Ice Block(MAGE), Dettrence(HUNTER), Spell Reflect(WAR), Shield Wall(WAR), Barkskin(DRU), Survival Instincts(DRU), Cloack of Shadows(ROG), Evasion(ROG), Sacrifice(LOCK Pet), Shamanistic Rage(SHA), The Beast Within(HUNT)
+	{spellId = 48792, spellId2 = 48707, spellId3 = 498, spellId4 = 642, spellId5 = 47585, spellId6 = 45438, spellId7 = 19263, spellId8 = 23920, spellId9 = 871, spellId10 = 22812, spellId11 = 61336, spellId12 = 31224, spellId13 = 26669, spellId14 = 47986, spellId15 = 30823, spellid16 = 34471, size = 64, unitId = "target", isMine = all, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", -148, 37}},
+	-- Shareable safe abilities: Anti-magic zone(DK), Hand of Protection(PAL), Hand of Sacriface(PAL), Aura Mastery(PAL), Divine Sacriface(PAL), Guardian Spirit(PRIEST), Pain Suppression(PRIEST), Intervene(WAR), Hymn of Hope(PRIEST), Tranquility(DRU)
+	{spellId = 50461, spellId2 = 1022, spellId3 = 6940, spellId4 = 31821, spellId5 = 64205, spellId6 = 47788, spellId7 = 33206, spellId8 = 3411, spellId9 = 64901, spellId10 = 48447, size = 64, unitId = "target", isMine = all, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", -222, 37}},
+	-- Minor safe abilities: Hand of Freedom(PAL), Divine Hymn(PRIEST), Ice Barrier(MAGE), Mana Shield(MAGE), Fire Ward(MAGE), Frost Ward(MAGE), Shield Block(WAR), Enraged Regeneration(WAR), Frenzied Regeneration(DRU), Shadow Ward(LOCK), Stoneclaw Totem(SHA)
+	{spellId = 1044, spellId2 = 64843, spellId3 = 43039, spellId4 = 43020, spellId5= 43010, spellId6 = 43012, spellId7 = 2565, spellId8 = 55694, spellId9 = 22842, spellId10 = 47891, spellid11 = 58582, size = 64, unitId = "target", isMine = all, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", -296, 37}},
+
 	},
     ["PRIEST"] = {
     -- Inner Fire
