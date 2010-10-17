@@ -22,7 +22,6 @@ Each entry in list creates a separate icon. Entry is a table with values in it:
 - size - icon size in pixels
 - unitId - unit at which you wish to track selected spell(s). More info: http://www.wowwiki.com/UnitId
 - isMine - this is filter. isMine = 1 means only  effects from units in MyUnits table will be shown (see below for this table. Note: isMine = "1" will NOT work, it should be number, not string. Any other value will show effect from any source
-- filter - filter again =). Needs to be "HELPFUL" for buffs and "HARMFUL" for debuffs.
 - setPoint - where to place the icon. It's a table with coordinates inside. More info: http://www.wowwiki.com/API_Region_SetPoint
 Original addon version: http://toxila.googlecode.com/svn/zips/sFilter/
 ]]
@@ -73,11 +72,34 @@ sFilter_Spells = {
     ["DRUID"] = {
 
     },
-    ["HUNTER"] = { -- by haylie from wowinterface.com
+    ["HUNTER"] = {
 
     },
     ["MAGE"] = {
- 
+    -- Living Bomb
+    {spellId = 44457, size = 64, unitId = "target", isMine = 1, setPoint = {"CENTER", UIParent, "CENTER", 222, -54}},
+    -- Fingers of Frost (Frost), Arcane Missiles! (Arcane), Hot Streak (Fire)
+    {spellId = 44544, spellId2 = 79683, spellId3 = 44448, size = 64, unitId = "player", isMine = all, setPoint = {"CENTER", UIParent, "CENTER", 148, -54}},
+    -- Invocation
+    {spellId = 87098, size = 32, unitId = "player", isMine = 1, setPoint = {"CENTER", UIParent, "CENTER", 169, 37}},
+    -- Clear Casting
+    {spellId = 12536, size = 32, unitId = "player", isMine = 1, setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
+    -- Fiery Payback (Fire)  
+    {spellId = 44440, size = 32, unitId = "player", isMine = "all", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
+	-- Deep Freeze (Frost)
+	{spellId = 44572, size = 32, unitId = "target", isMine = "all", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
+    -- Impact, Arcane Potency (Arcane)
+    {spellId = 12358, spellId2 = 57531, size = 32, unitId = "target", isMine = "all", setPoint = {"CENTER", UIParent, "CENTER", 169, 37}},
+    -- Arcane Blast debuff 
+    {spellId = 36032, size = 32, unitId = "player", isMine = "all", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
+	-- Blazing Speed (Fire), Improved Blink (Arcane)
+	{spellId = 31643, spellId2 = 47000, size = 32, unitId = "player", isMine = "all", setPoint = {"CENTER", UIParent, "CENTER", 206, 37}},
+    -- Spell Crit - Winter's Chill (Frost), Improved Scorch (Fire)
+    {spellId = 28593, spellId2 = 22959, size = 32, unitId = "target", isMine = "1", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},  
+    -- Polymorph - Sheep, Pig, Turkey, Black Cat, Rabbit, Turtle, 
+    {spellId = 118, spellId2 = 28272, spellId3 = 61780, spellId4 = 61305, spellId5 = 61721, spellId6 = 28271, size = 32, unitId = "target", isMine = "1", setPoint = {"CENTER", UIParent, "CENTER", 132, 37}},
+    -- Slow (Arcane), Ignite (Fire), Frostbite (Frost)
+    {spellId = 31589, spellId2 = 12848, spellId3 = 12497, size = 32, unitId = "target", isMine = 1, setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
     },
     ["PALADIN"] = {
     -- Hand of Light (Retrobution), Grand Crusader (Protection) 
@@ -139,7 +161,7 @@ sFilter_Spells = {
 
 	},
     ["WARRIOR"] = {
-    -- Instant Shield Slam (Protection)
+    -- Sword and Board (Protection)
     {spellId = 50227, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -54}},
     -- Bloodsurge (Fury), Sudden Death (Arms)
     {spellId = 46916, spellId2 = 52437, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -54}},

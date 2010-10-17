@@ -2,7 +2,7 @@
 	sFilter
 	Copyright (c) 2009, Nils Ruesch
 	All rights reserved.
-	Edited by ALZA
+	Edited by ALZA, Danpiel.
 ]]
 
 local s = sFilter_Settings
@@ -28,12 +28,12 @@ local function sFilter_CreateFrame(data)
             self.found = false
             self:SetAlpha(1)
             for i=1, 40 do
-                local name, rank, icon, count, debuffType, duration, expirationTime, caster, isStealable = UnitAura(data.unitId, i, data.filter)
+                local name, rank, icon, count, debuffType, duration, expirationTime, caster, isStealable = UnitAura(data.unitId, i)
                 if((data.isMine~=1 or MyUnits[caster]) and (name==GetSpellInfo(data.spellId) or (data.spellId2 and name==GetSpellInfo(data.spellId2)) or (data.spellId3 and name==GetSpellInfo(data.spellId3)))) then
                     self.found = true
                     self.icon:SetTexture(icon)
                     self.count:SetText(count>1 and count or "")
-                    if(duration>0) then
+                    if(duration>=0) then
                         self.cooldown:Show()
                         CooldownFrame_SetTimer(self.cooldown, expirationTime-duration, duration, 1)
                     else
@@ -61,7 +61,7 @@ local function sFilter_CreateFrame(data)
         frame:SetMovable(true)
         frame:EnableMouse(true)
         frame:RegisterForDrag("LeftButton", "RightButton")
-        frame:SetScript("OnMouseDown", function(self)
+        frame:SetScript("OnMouseDown", function(self,arg1)
             if(arg1=="LeftButton") then
                 if(IsShiftKeyDown() or IsAltKeyDown()) then
                     self:StartMoving()
@@ -71,15 +71,15 @@ local function sFilter_CreateFrame(data)
                 self:SetPoint(unpack(data.setPoint))
             end
         end)
-        frame:SetScript("OnMouseUp", function(self) 
+        frame:SetScript("OnMouseUp", function(self,arg1) 
             self:StopMovingOrSizing()
             if(arg1=="LeftButton") then
                 local x, y = self:GetCenter()
-                print(format("|cffff00ffs|rFilter: setPoint for %s (%s): {\"%s\", UIParent, \"%s\", %s, %s}", data.spellId, spellName, "CENTER", "BOTTOMLEFT", floor(x + 0.5), floor(y + 0.5)))
+                print(format("|cffff00ffs|rFilter: setPoint for %s (%s): {\"%s\", UIParent, \"%s\", %s, %s}", data.spellId, spellName, "CENTER", "CENTER", floor(x + 0.5), floor(y + 0.5)))
             end
         end)
     end
-
+	
     frame.icon = frame:CreateTexture("$parentIcon", "BACKGROUND")
     frame.icon:SetAllPoints(frame)
     frame.icon:SetTexture(spellIcon)
