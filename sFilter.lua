@@ -28,7 +28,7 @@ local function sFilter_CreateFrame(data)
             self.found = false
             self:SetAlpha(1)
             for i=1, 40 do
-                local name, rank, icon, count, debuffType, duration, expirationTime, caster, isStealable = UnitAura(data.unitId, i)
+                local name, rank, icon, count, debuffType, duration, expirationTime, caster, isStealable = UnitAura(data.unitId, i, data.filter)
                 if((data.isMine~=1 or MyUnits[caster]) and (name==GetSpellInfo(data.spellId) or (data.spellId2 and name==GetSpellInfo(data.spellId2)) or (data.spellId3 and name==GetSpellInfo(data.spellId3)))) then
                     self.found = true
                     self.icon:SetTexture(icon)
@@ -75,7 +75,7 @@ local function sFilter_CreateFrame(data)
             self:StopMovingOrSizing()
             if(arg1=="LeftButton") then
                 local x, y = self:GetCenter()
-                print(format("|cffff00ffs|rFilter: setPoint for %s (%s): {\"%s\", UIParent, \"%s\", %s, %s}", data.spellId, spellName, "CENTER", "CENTER", floor(x + 0.5), floor(y + 0.5)))
+                print(format("s|cFFFF8C00F|r|cFFFFFFFFfilter|r: setPoint for %s (%s): {\"%s\", UIParent, \"%s\", %s, %s}", data.spellId, spellName, "CENTER", "CENTER", floor(x + 0.5), floor(y + 0.5)))
             end
         end)
     end

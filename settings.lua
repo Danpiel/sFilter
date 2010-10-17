@@ -22,29 +22,11 @@ Each entry in list creates a separate icon. Entry is a table with values in it:
 - size - icon size in pixels
 - unitId - unit at which you wish to track selected spell(s). More info: http://www.wowwiki.com/UnitId
 - isMine - this is filter. isMine = 1 means only  effects from units in MyUnits table will be shown (see below for this table. Note: isMine = "1" will NOT work, it should be number, not string. Any other value will show effect from any source
+- filter - filter again =). Needs to be "HELPFUL" for buffs and "HARMFUL" for debuffs.
 - setPoint - where to place the icon. It's a table with coordinates inside. More info: http://www.wowwiki.com/API_Region_SetPoint
 Original addon version: http://toxila.googlecode.com/svn/zips/sFilter/
 ]]
 
---[[ PVP Section
-This is a list of bufs on targets i.e. Shild Wall or Bubble, there will be three icons, first will be major safe ablities (Ice Block, Icebond Fortitude), second is safe abilities from another player (Blessing of protection, Antimagic zone)
-and third wiil be minor buffs (Blessing of Freedom, Stoneclaw totem)
-
-Spells will be added by slot of priority
-
-All icons 64 size
-
--- Add this list to your character class
-
-PVP Spells = {
-	-- Major Safe abilities: Icebond Fortitude(DK), Anti-magic shield (DK), Divine Protection(PAL), Divine Protection(PAL), Dispersion(PRIEST), Ice Block(MAGE), Dettrence(HUNTER), Spell Reflect(WAR), Shield Wall(WAR), Barkskin(DRU), Survival Instincts(DRU), Cloack of Shadows(ROG), Evasion(ROG), Sacrifice(LOCK Pet), Shamanistic Rage(SHA), The Beast Within(HUNT)
-	{spellId = 48792, spellId2 = 48707, spellId3 = 498, spellId4 = 642, spellId5 = 47585, spellId6 = 45438, spellId7 = 19263, spellId8 = 23920, spellId9 = 871, spellId10 = 22812, spellId11 = 61336, spellId12 = 31224, spellId13 = 26669, spellId14 = 47986, spellId15 = 30823, spellid16 = 34471, size = 64, unitId = "target", isMine = all, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", -148, 37}},
-	-- Shareable safe abilities: Anti-magic zone(DK), Hand of Protection(PAL), Hand of Sacriface(PAL), Aura Mastery(PAL), Divine Sacriface(PAL), Guardian Spirit(PRIEST), Pain Suppression(PRIEST), Intervene(WAR), Hymn of Hope(PRIEST), Tranquility(DRU)
-	{spellId = 50461, spellId2 = 1022, spellId3 = 6940, spellId4 = 31821, spellId5 = 64205, spellId6 = 47788, spellId7 = 33206, spellId8 = 3411, spellId9 = 64901, spellId10 = 48447, size = 64, unitId = "target", isMine = all, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", -222, 37}},
-	-- Minor safe abilities: Hand of Freedom(PAL), Divine Hymn(PRIEST), , Ice Barrier(MAGE), Mana Shield(MAGE), Fire Ward(MAGE), Frost Ward(MAGE), Shield Block(WAR), Enraged Regeneration(WAR), Frenzied Regeneration(DRU), Shadow Ward(LOCK), Stoneclaw Totem(SHA)
-	{spellId = 1044, spellId2 = 64843, spellId3 = 43039, spellId4 = 43020, spellId67= 43010, spellId8 = 43012, spellId9 = 2565, spellId10 = 55694, spellId11 = 22842, spellId12 = 47891, spellid13 = 58582, size = 64, unitId = "target", isMine = all, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", -296, 37}},
-
---]]
 
 sFilter_Spells = {
     ["DEATHKNIGHT"] = {
@@ -77,29 +59,29 @@ sFilter_Spells = {
     },
     ["MAGE"] = {
     -- Living Bomb
-    {spellId = 44457, size = 64, unitId = "target", isMine = 1, setPoint = {"CENTER", UIParent, "CENTER", 222, -54}},
+    {spellId = 44457, size = 64, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -54}},
     -- Fingers of Frost (Frost), Arcane Missiles! (Arcane), Hot Streak (Fire)
-    {spellId = 44544, spellId2 = 79683, spellId3 = 44448, size = 64, unitId = "player", isMine = all, setPoint = {"CENTER", UIParent, "CENTER", 148, -54}},
+    {spellId = 44544, spellId2 = 79683, spellId3 = 44448, size = 64, unitId = "player", isMine = all, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -54}},
     -- Invocation
-    {spellId = 87098, size = 32, unitId = "player", isMine = 1, setPoint = {"CENTER", UIParent, "CENTER", 169, 37}},
+    {spellId = 87098, size = 32, unitId = "player", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 37}},
     -- Clear Casting
     {spellId = 12536, size = 32, unitId = "player", isMine = 1, setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
     -- Fiery Payback (Fire)  
-    {spellId = 44440, size = 32, unitId = "player", isMine = "all", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
+    {spellId = 64346, size = 32, unitId = "target", isMine = "all", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
 	-- Deep Freeze (Frost)
-	{spellId = 44572, size = 32, unitId = "target", isMine = "all", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
-    -- Impact, Arcane Potency (Arcane)
-    {spellId = 12358, spellId2 = 57531, size = 32, unitId = "target", isMine = "all", setPoint = {"CENTER", UIParent, "CENTER", 169, 37}},
+	{spellId = 44572, size = 32, unitId = "target", isMine = "all", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
+    -- Impact
+    {spellId = 12358, size = 32, unitId = "target", isMine = "all", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 37}},
     -- Arcane Blast debuff 
-    {spellId = 36032, size = 32, unitId = "player", isMine = "all", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
+    {spellId = 36032, size = 32, unitId = "player", isMine = "all", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
 	-- Blazing Speed (Fire), Improved Blink (Arcane)
-	{spellId = 31643, spellId2 = 47000, size = 32, unitId = "player", isMine = "all", setPoint = {"CENTER", UIParent, "CENTER", 206, 37}},
+	{spellId = 31643, spellId2 = 47000, size = 32, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 37}},
     -- Spell Crit - Winter's Chill (Frost), Improved Scorch (Fire)
-    {spellId = 28593, spellId2 = 22959, size = 32, unitId = "target", isMine = "1", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},  
+    {spellId = 28593, spellId2 = 22959, size = 32, unitId = "target", isMine = "1", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},  
     -- Polymorph - Sheep, Pig, Turkey, Black Cat, Rabbit, Turtle, 
-    {spellId = 118, spellId2 = 28272, spellId3 = 61780, spellId4 = 61305, spellId5 = 61721, spellId6 = 28271, size = 32, unitId = "target", isMine = "1", setPoint = {"CENTER", UIParent, "CENTER", 132, 37}},
+    {spellId = 118, spellId2 = 28272, spellId3 = 61780, spellId4 = 61305, spellId5 = 61721, spellId6 = 28271, size = 32, unitId = "target", isMine = "1", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 37}},
     -- Slow (Arcane), Ignite (Fire), Frostbite (Frost)
-    {spellId = 31589, spellId2 = 12848, spellId3 = 12497, size = 32, unitId = "target", isMine = 1, setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
+    {spellId = 31589, spellId2 = 12848, spellId3 = 12497, size = 32, unitId = "target", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
     },
     ["PALADIN"] = {
     -- Hand of Light (Retrobution), Grand Crusader (Protection) 
@@ -130,9 +112,13 @@ sFilter_Spells = {
     -- Mind-numbing Poison
     {spellId = 5760, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
 	-- Slice and Dice
-	{spellId = 5171, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
+	{spellId = 5171, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
 	-- Rupture
-	{spellId = 1943, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},	
+	{spellId = 1943, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
+	-- Revelaling Strike
+	{spellId = 5171, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
+	-- Bandit's Guile (Combat)
+	{spellId = 84653, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},	
 	},
     ["SHAMAN"] = {
  
