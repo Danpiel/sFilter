@@ -1,5 +1,5 @@
 ## Interface: 40000
-## Title: s|cFFFF8C00F|r|cFFFFFFFFfilter|r
+## Title: |cFFFFFFFFs|r|cFFFF8C00F|r|cFFFFFFFFilter Spells|r
 ## Notes: Filter some stuff
 ## Author: Nils Ruesch
 ## Version: 3.1.2
