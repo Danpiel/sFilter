@@ -27,6 +27,25 @@ Each entry in list creates a separate icon. Entry is a table with values in it:
 Original addon version: http://toxila.googlecode.com/svn/zips/sFilter/
 ]]
 
+--[[ PVP Section
+This is a list of bufs on targets i.e. Shild Wall or Bubble, there will be three icons, first will be major safe ablities (Ice Block, Icebond Fortitude), second is safe abilities from another player (Blessing of protection, Antimagic zone)
+and third wiil be minor buffs (Blessing of Freedom, Stoneclaw totem)
+
+Spells will be added by slot of priority
+
+All icons 64 size
+
+-- Add this list to your character class
+
+PVP Spells = {
+	-- Major Safe abilities: Icebond Fortitude(DK), Anti-magic shield (DK), Divine Protection(PAL), Divine Protection(PAL), Dispersion(PRIEST), Ice Block(MAGE), Dettrence(HUNTER), Spell Reflect(WAR), Shield Wall(WAR), Barkskin(DRU), Survival Instincts(DRU), Cloack of Shadows(ROG), Evasion(ROG), Sacrifice(LOCK Pet), Shamanistic Rage(SHA), The Beast Within(HUNT)
+	{spellId = 48792, spellId2 = 48707, spellId3 = 498, spellId4 = 642, spellId5 = 47585, spellId6 = 45438, spellId7 = 19263, spellId8 = 23920, spellId9 = 871, spellId10 = 22812, spellId11 = 61336, spellId12 = 31224, spellId13 = 26669, spellId14 = 47986, spellId15 = 30823, spellid16 = 34471, size = 64, unitId = "target", isMine = all, setPoint = {"CENTER", UIParent, "CENTER", -148, 37}},
+	-- Shareable safe abilities: Anti-magic zone(DK), Hand of Protection(PAL), Hand of Sacriface(PAL), Aura Mastery(PAL), Divine Sacriface(PAL), Guardian Spirit(PRIEST), Pain Suppression(PRIEST), Intervene(WAR), Hymn of Hope(PRIEST), Tranquility(DRU)
+	{spellId = 50461, spellId2 = 1022, spellId3 = 6940, spellId4 = 31821, spellId5 = 64205, spellId6 = 47788, spellId7 = 33206, spellId8 = 3411, spellId9 = 64901, spellId10 = 48447, size = 64, unitId = "target", isMine = all, setPoint = {"CENTER", UIParent, "CENTER", -222, 37}},
+	-- Minor safe abilities: Hand of Freedom(PAL), Divine Hymn(PRIEST), , Ice Barrier(MAGE), Mana Shield(MAGE), Fire Ward(MAGE), Frost Ward(MAGE), Shield Block(WAR), Enraged Regeneration(WAR), Frenzied Regeneration(DRU), Shadow Ward(LOCK), Stoneclaw Totem(SHA)
+	{spellId = 1044, spellId2 = 64843, spellId3 = 43039, spellId4 = 43020, spellId67= 43010, spellId8 = 43012, spellId9 = 2565, spellId10 = 55694, spellId11 = 22842, spellId12 = 47891, spellid13 = 58582, size = 64, unitId = "target", isMine = all, setPoint = {"CENTER", UIParent, "CENTER", -296, 37}},
+
+--]]
 
 sFilter_Spells = {
     ["DEATHKNIGHT"] = {
@@ -50,22 +69,61 @@ sFilter_Spells = {
 	{spellId = 55233, spellId2 = 51271, spellId3 = 49222, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 37}},
 	-- Anti-magic shield and zone
 	{spellId = 48707, spellId2 = 50461, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
+
     },
     ["DRUID"] = {
+    -- Moonfire, Lacirate, Rake
+    {spellId = 8921, spellId2 = 33745, spellId3 = 1822, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
+    -- Insect Swarm, Rip
+	{spellId = 5570, spellId2 = 1079, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
+    -- Mangle
+    {spellId = 33878, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},    
+	-- Entangling Roots
+    {spellId = 339, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
+	-- Shooting Stars (Starsurge instant) 
+	{spellId = 93400, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 37}},
+    -- CoE, Ebon Plague, Earth and Moon
+    {spellId = 1490, spellId2 = 65142, spellId3 = 60433, size = 32, unitId = "target", isMine = "all", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
+    -- Eclipse Solar, Eclipse Lunar
+    {spellId = 48517, spellId2 = 48518, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -54}},
+    -- Barkskin
+    {spellId = 22812, size = 32, unitId = "player", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 37}},
+    -- Survival Instincts
+    {spellId = 61336, size = 32, unitId = "player", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 37}},
+    -- Savage roar
+    {spellId = 52610, size = 32, unitId = "player", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 37}},
 
     },
     ["HUNTER"] = {
-
-    },
+    -- Hunter's Mark, Marked for Death
+    {spellId = 1130, spellId2 = 88691, size = 32, unitId = "target", isMine = "all", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
+    -- Serpent Sting
+    {spellId = 1978, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
+    -- Black Arrow
+    {spellId = 3674, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
+    -- Explosive Shot debuff
+    {spellId = 53301, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
+	-- Frenzy Effect (Beastmaster)
+    {spellId = 19615, size = 32, unitId = "pet", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 37}},
+    -- Lock and Load 
+    {spellId = 56453, size = 64, unitId = "player", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -54}},
+	-- Bestial Wrath (Beastmaster)
+	{spellId = 19574, size = 32, unitId = "pet", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 37}},
+	-- Ready, Set, Aim ... (Marksman)
+	{spellId = 82925, size = 32, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 37}},	
+	-- Focus Fire (Beastmaster), Improved Steady Shot (Marksman), Sniper Training (Survival) 
+    {spellId = 82692,  spellId2 = 53220, spellId3 = 64420, size = 32, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 37}},
+		
+	},
     ["MAGE"] = {
     -- Living Bomb
     {spellId = 44457, size = 64, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -54}},
     -- Fingers of Frost (Frost), Arcane Missiles! (Arcane), Hot Streak (Fire)
     {spellId = 44544, spellId2 = 79683, spellId3 = 44448, size = 64, unitId = "player", isMine = all, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -54}},
-    -- Invocation
-    {spellId = 87098, size = 32, unitId = "player", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 37}},
+    -- Invocation (Arcane), Pyromaniac (Fire)
+    {spellId = 87098, spellid2 = 83582, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 37}},
     -- Clear Casting
-    {spellId = 12536, size = 32, unitId = "player", isMine = 1, setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
+    {spellId = 12536, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
     -- Fiery Payback (Fire)  
     {spellId = 64346, size = 32, unitId = "target", isMine = "all", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
 	-- Deep Freeze (Frost)
@@ -76,12 +134,13 @@ sFilter_Spells = {
     {spellId = 36032, size = 32, unitId = "player", isMine = "all", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
 	-- Blazing Speed (Fire), Improved Blink (Arcane)
 	{spellId = 31643, spellId2 = 47000, size = 32, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 37}},
-    -- Spell Crit - Winter's Chill (Frost), Improved Scorch (Fire)
-    {spellId = 28593, spellId2 = 22959, size = 32, unitId = "target", isMine = "1", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},  
+    -- Winter's Chill (Frost), Improved Scorch (Fire)
+    {spellId = 28593, spellId2 = 22959, size = 32, unitId = "target", isMine = "1", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},  
     -- Polymorph - Sheep, Pig, Turkey, Black Cat, Rabbit, Turtle, 
     {spellId = 118, spellId2 = 28272, spellId3 = 61780, spellId4 = 61305, spellId5 = 61721, spellId6 = 28271, size = 32, unitId = "target", isMine = "1", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 37}},
     -- Slow (Arcane), Ignite (Fire), Frostbite (Frost)
-    {spellId = 31589, spellId2 = 12848, spellId3 = 12497, size = 32, unitId = "target", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
+    {spellId = 31589, spellId2 = 12848, spellId3 = 12497, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
+
     },
     ["PALADIN"] = {
     -- Hand of Light (Retrobution), Grand Crusader (Protection) 
@@ -94,13 +153,40 @@ sFilter_Spells = {
 	{spellId = 88819, spellId2 = 20925, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
 	-- Infusion of Light (Holy), Guarded by the light (Protection)
 	{spellId = 54149, spellId2 = 88063, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
-    -- Denounce (Holy) 
+    -- Denounce (Holy), 
 	{spellId = 85509, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 37}},
+	-- Censore (SoT debuff)
+	{spellId = 31803, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 37}},
 	-- Divine Plea
 	{spellId = 54428 , size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
+	-- Forbearance
+	{spellId = 25771, size = 32, unitId = "player", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
+		
 	},
     ["PRIEST"] = {
-
+    -- Power Word:Shield on self
+    {spellId = 17, size = 32, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
+	-- Serendipity (Rank 1,2) (Holy), Mind Melt (Shadow)
+	{spellId = 63731, spellId2 = 63735, spellId3 = 81292, size = 32, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 37}},
+	-- Chakra, Chakra States: Heal, Renew, Prayer of Healing, Smite
+	{spellId = 14751, spellId2 = 81208, spellId3 = 81207, spellId4 = 81206, spellId5 = 81209, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 37}},
+    -- Renew on target
+    {spellId = 139, size = 32, unitId = "target", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
+    -- Surge of Light (Holy), Borrowed Time (Discipline)
+    {spellId = 33151, spellId2 = 59889, size = 32, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 37}},
+    -- Shadow Word:Pain
+    {spellId = 589, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
+    -- Vampiric Touch
+    {spellId = 34914, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
+    -- Devouring Plague
+    {spellId = 2944, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
+	-- Evangelism, Dark Evangelism, Archangel, Dark Archangel 
+	{spellId = 81660, spellId2 = 87117, spellId3 = 81700, spellId4 = 87153, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
+	-- Spirit of Redemption (Holy)
+	{spellId = 27827, size = 64, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -54}},
+	-- Power Infusion on self
+	{spellId = 10060, size = 32, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
+	
     },
     ["ROGUE"] = {
 	-- Deadly Poison
@@ -114,22 +200,37 @@ sFilter_Spells = {
 	-- Slice and Dice
 	{spellId = 5171, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
 	-- Rupture
-	{spellId = 1943, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
-	-- Revelaling Strike
-	{spellId = 5171, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
-	-- Bandit's Guile (Combat)
-	{spellId = 84653, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},	
+	{spellId = 1943, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
+	-- Revealing Strike
+	{spellId = 84617, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
+	-- Bandit's Guile (Combat), Vendetta (Assassination)
+	{spellId = 84653, spellId2 = 79140, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},	
+
 	},
     ["SHAMAN"] = {
+    -- Hex
+    {spellId = 51514, size = 32, unitId = "target", isMine = "all", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 37}},
+    -- Water Shield, Earth Shield, Lightning Shield
+    {spellId = 52127, spellId2 = 974, spellId3 = 324, size = 32, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
+    -- Flame Shock, Frost Shock
+    {spellId = 8050, spellId2 = 8056, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
+	-- Tidal Waves, Maelstrom Weapon, Elemental Mastery (haste, damage)
+    {spellId = 53390, spellId2 = 53817, spellId3 = 64701, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
+	-- Earth Shield on target 
+    {spellId = 974, size = 32, unitId = "target", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
+    -- Riptide
+    {spellId = 61295, size = 32, unitId = "target", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
+	-- Searing Flame (Enhancement Searing Totem)
+	{spellId = 77661, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 37}},
  
-    },
+	},
     ["WARLOCK"] = {
     -- CoE, Ebon Plague, Earth and Moon
     {spellId = 1490, spellId2 = 65142, spellId3 = 60433, size = 32, unitId = "target", isMine = "all", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
     -- CoT, CoEx, CoW
     {spellId = 1714, spellId2 = 18223, spellId3 = 702, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
-    -- Molten Core (Demonology), Shadow Trance (Affliction)
-    {spellId = 47383, spellId2 = 18095, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
+    -- Molten Core (Demonology), Shadow Trance (Affliction), Improved Soulfire (Destruction)
+    {spellId = 47383, spellId2 = 18095, spellId3 = 85383, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
     -- Decimation (Demonology), Backdraft (Destruction), Eradication (Affliction)
     {spellId = 63158, spellId2 = 54277, spellId3 = 47195, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
     -- Immolation, Unstable Affliction (Affliction)
@@ -144,6 +245,8 @@ sFilter_Spells = {
 	{spellId = 34939, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, 54}},
 	-- Fear, Nightmare 
 	{spellId = 5782, spellId2 = 1714, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
+	-- Empowered Imp (Destruction)
+	{spellId = 47283, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -54}},
 
 	},
     ["WARRIOR"] = {
