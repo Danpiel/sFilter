@@ -91,7 +91,6 @@ sFilter_Spells = {
     {spellId = 61336, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 37}},
 	-- Frenzied Regeneration
     {spellId = 22842, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 37}},
-
 	
 	-- Faerie Fire (Feral), Faerie Fire
     {spellId = 91565, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
@@ -127,6 +126,8 @@ sFilter_Spells = {
 	{spellId = 19574, size = 32, unitId = "pet", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 37}},
 	-- Focus Fire (Beastmaster), Improved Steady Shot (Marksman), Sniper Training (Survival) 
     {spellId = 82692,  spellId2 = 53220, spellId3 = 64420, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 37}},
+	-- Cobra Strikes (Beastmaster)
+    {spellId = 53257, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},	
 
 	-- Frenzy Effect (Beastmaster)
     {spellId = 19615, size = 32, unitId = "pet", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
@@ -147,8 +148,10 @@ sFilter_Spells = {
     {spellId = 24131, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
 
 
-    -- Lock and Load (Suvival), Ready, Set, Aim ... (Marksman) 
-    {spellId = 56453, spellId2 = 82925,size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
+    -- Lock and Load (Suvival), Ready, Set, Aim ... (Marksman), Killing Streak (Beastmaster)
+    {spellId = 56453, spellId2 = 82925, spellId3 = 94007, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
+	-- 
+
 	},
 
     ["MAGE"] = {
@@ -162,6 +165,8 @@ sFilter_Spells = {
     -- Polymorph - Sheep, Pig, Turkey, Black Cat, Rabbit, Turtle 
     {spellId = 118, spellId2 = 28272, spellId3 = 61780, spellId4 = 61305, spellId5 = 61721, spellId6 = 28271, size = 32, unitId = "target", isMine = "1", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
 
+	-- Combustion (Fire)
+    {spellId = 83853, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},	
     -- Arcane Blast debuff 
     {spellId = 36032, size = 32, unitId = "player", isMine = "all", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
     -- Invocation (Arcane), Pyromaniac (Fire)
@@ -175,18 +180,19 @@ sFilter_Spells = {
     {spellId = 44457, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
     -- Slow (Arcane), Ignite (Fire), Frostbite (Frost)
     {spellId = 31589, spellId2 = 12654, spellId3 = 12497, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
+	-- Pyroblast debuff (Fire)
+    {spellId = 92315, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
 	-- Frostfire bolt (glyphed)
-    {spellId = 44614, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
-	-- Combustoin (Fire)
-    {spellId = 83853, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},	
+    {spellId = 44614, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
 
     -- Fingers of Frost (Frost), Arcane Missiles! (Arcane), Hot Streak (Fire)
-    {spellId = 44544, spellId2 = 79683, spellId3 = 48108, size = 64, unitId = "player", isMine = all, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
-    -- Clear Casting, Cauterize (Fire)
-    {spellId = 12536, spellId2 = 87023, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},  
+    {spellId = 44544, spellId2 = 79683, spellId3 = 48108, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
+    -- Brain Freeze (Frost), Clear Casting, Cauterize (Fire)
+    {spellId = 57761, spellId2 = 12536, spellId3 = 87023, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},  
 	},
 
     ["PALADIN"] = {
+	
 	-- Guardian of Ancient Kings (Protection)
     {spellId = 86659, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 37}},	
     -- Speed of Light (Holy), Divine protection
@@ -206,13 +212,15 @@ sFilter_Spells = {
 	-- Censore (SoT debuff)
 	{spellId = 31803, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
 	-- Inquisition
-	{spellId = 84963, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
+	{spellId = 84963, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
 	-- Judgements of the Pure (Holy)
     {spellId = 53657, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},	
     -- Hand of Light (Retrobution), Grand Crusader (Protection), Infusion of Light (Holy)
 	{spellId = 90174, spellId2 = 85416, spellId3 = 54149, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},		
 	-- Art of War (Retrobution), Denounce (Holy)
-    {spellId = 59578, spellId2 = 85509,size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},
+    {spellId = 59578, spellId2 = 85509, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},
+	-- Hymn of Hope buff
+    {spellId = 64904, size = 64, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},
 	},
     
 	["PRIEST"] = {
@@ -223,6 +231,8 @@ sFilter_Spells = {
 	{spellId = 87178, size = 32, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 37}},	
 	-- Serendipity (Rank 1,2) (Holy), Mind Melt (Shadow)
 	{spellId = 63731, spellId2 = 63735, spellId3 = 81292, size = 32, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 37}},
+	-- Empowered Shadow (Shadow Mastery)
+	{spellId = 95799, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},	
 
 	
 	-- Chakra, Chakra States: Heal, Renew, Prayer of Healing, Smite 
@@ -255,7 +265,7 @@ sFilter_Spells = {
     ["ROGUE"] = {
 
 	-- Revealing Strike
-	{spellId = 84617, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
+	{spellId = 84617, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
 	-- Rupture
 	{spellId = 1943, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},	
 	-- Bandit's Guile (Combat) Shallow Insight, Vendetta (Assassination)
@@ -347,6 +357,8 @@ sFilter_Spells = {
     {spellId = 1715, spellId2 = 12323, size = 32, unitId = "target", isMine = "all", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
 	-- Thunderstruck (Protection)
     {spellId = 87095, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},	
+	-- Colossus Smash debuff
+    {spellId = 86346, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},	
 	
     -- Sword and Board (Protection), Bloodsurge (Fury), Sudden Death (Arms)
     {spellId = 50227, spellId2 = 46916, spellId3 = 52437,size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}}, 
