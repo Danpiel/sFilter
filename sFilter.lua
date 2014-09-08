@@ -40,7 +40,7 @@ local function sFilter_CreateFrame(data)
                     else
                         self.cooldown:Hide()
                     end
-				else 
+				else
 				self.cooldown:Hide()
 				end
                     break
@@ -75,15 +75,15 @@ local function sFilter_CreateFrame(data)
                 self:SetPoint(unpack(data.setPoint))
             end
         end)
-        frame:SetScript("OnMouseUp", function(self,arg1) 
+        frame:SetScript("OnMouseUp", function(self,arg1)
             self:StopMovingOrSizing()
             if(arg1=="LeftButton") then
                 local x, y = self:GetCenter()
-                print(format("s|cFFFF8C00F|r|cFFFFFFFFfilter|r: setPoint for %s (%s): {\"%s\", UIParent, \"%s\", %s, %s}", data.spellId, spellName, "CENTER", "BOTTOMLEFT", floor(x + 0.5), floor(y + 0.5)))
+                print(format("s|cFFFF8C00F|r|cFFFFFFFFfilter|r: setPoint for %s (%s): {\"%s\", UIParent, \"%s\", %s, %s}", data.spellId, spellName, "CENTER", "CENTER", floor(x + 0.5), floor(y + 0.5)))
             end
         end)
     end
-	
+
     frame.icon = frame:CreateTexture("$parentIcon", "BACKGROUND")
     frame.icon:SetAllPoints(frame)
     frame.icon:SetTexture(spellIcon)

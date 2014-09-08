@@ -1,4 +1,4 @@
-## Interface: 40000
+## Interface: 50400
 ## Title: |cFFFFFFFFs|r|cFFFF8C00F|r|cFFFFFFFFilter Spells|r
 ## Notes: Filter some stuff
 ## Author: Nils Ruesch, Danpiel
