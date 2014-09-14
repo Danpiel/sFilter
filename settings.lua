@@ -63,8 +63,8 @@ sFilter_Spells = {
 	{spellId = 91342, size = 32, unitId = "pet", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
 	-- Dark Transformation
 	{spellId = 63560, size = 32, unitId = "pet", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
-	-- Blood Shield (Blood Mastery)
-	{spellId = 77535, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
+	-- Blood Shield (Blood Mastery), Unholy Frenzy on self(Unholy),
+	{spellId = 77535, spellId2 = 49016, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
 	-- Blade Barrier
 	{spellId = 64856, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
 
@@ -79,8 +79,8 @@ sFilter_Spells = {
 
 	-- Killing Machine (Frost), Sudden Doom (Unholy)
 	{spellId = 51124, spellId2 = 81340, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
-	-- Rime (Freezing Fog), Unholy Frenzy on self(Unholy), Soul Reaper
-	{spellId = 59052, spellId2 = 49016, spellId3 = 130736 size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},
+	-- Rime (Freezing Fog), Soul Reaper (Frost), Soul Reaper (Unholy)
+	{spellId = 59052, spellId2 = 130735, spellId3 = 130736 size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},
   },
 
   ["DRUID"] = {
