@@ -79,8 +79,8 @@ sFilter_Spells = {
 
 	-- Killing Machine (Frost), Sudden Doom (Unholy)
 	{spellId = 51124, spellId2 = 81340, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
-	-- Rime (Freezing Fog), Unholy Frenzy on self(Unholy)
-	{spellId = 59052, spellId2 = 49016, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},
+	-- Rime (Freezing Fog), Unholy Frenzy on self(Unholy), Soul Reaper
+	{spellId = 59052, spellId2 = 49016, spellId3 = 130736 size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},
   },
 
   ["DRUID"] = {
