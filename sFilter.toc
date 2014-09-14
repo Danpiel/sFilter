@@ -2,7 +2,7 @@
 ## Title: |cFFFFFFFFs|r|cFFFF8C00F|r|cFFFFFFFFilter Spells|r
 ## Notes: Filter some stuff
 ## Author: Nils Ruesch, Danpiel
-## Version: 4.0.4
+## Version: 4.0.5
 
 settings.lua
 sFilter.lua
