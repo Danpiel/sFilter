@@ -211,30 +211,28 @@ sFilter_Spells = {
   {spellId = 90174, spellId2 = 85416, spellId3 = 54149, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
   -- Art of War (Retrobution),  Enhanced Holy Shock (Holy)
   {spellId = 59578, spellId2 = 160002, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},
+
   },
 
   ["PRIEST"] = {
 
-  -- Surge of Light (Holy)
-  {spellId = 33151, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 37}},
-  -- Mind Spike
-  {spellId = 87178, size = 32, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 37}},
+  -- Surge of Light, Surge of Darkness
+  {spellId = 114255, spellId2 = 87160, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 37}},
+  -- Archangel
+  {spellId = 81700, size = 32, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 37}},
   -- Serendipity (Holy), Mind Melt (Shadow)
   {spellId = 63735, spellId2 = 81292, size = 32, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 37}},
-  -- Empowered Shadow (Shadow Mastery)
-  --{spellId = 95799, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
+  -- Worlds of Mending
+  {spellId = 155362, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
 
-
-  -- Chakra, Chakra States: Heal, Renew, Prayer of Healing, Smite
-  --{spellId = 14751, spellId2 = 81208, spellId3 = 81207, spellId4 = 81206, spellId5 = 81209, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
-  -- Borrowed Time (Discipline)
-  {spellId = 59889, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
+  -- Borrowed Time (Discipline), Mind Spike
+  {spellId = 59889, spellId2 = 87178, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
   -- Shadow Orb
-  {spellId = 77487, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
-  -- Evangelism, Dark Evangelism
-  --{spellId = 81660, spellId2 = 87117, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
-  -- Archangel, Dark Archangel
-  {spellId = 81700, spellId2 = 87153, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
+  {spellId = 77487, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
+  -- Saving Grace
+  {spellId = 155274, size = 32, unitId = "player", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
+  -- Angelic Feather
+  {spellId = 121557, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
 
   -- Shadow Word:Pain
   {spellId = 589, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
@@ -242,13 +240,13 @@ sFilter_Spells = {
   {spellId = 34914, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
   -- Devouring Plague
   {spellId = 2944, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
-  -- Power Word:Shield on self
-  {spellId = 17, size = 32, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
+  -- Void Entropy
+  {spellId = 155361, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
 
-  -- Power Infusion on self
-  {spellId = 10060, size = 64, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
-  -- Spirit of Redemption (Holy)
-  {spellId = 27827, size = 64, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},
+  -- Divine Insight (Holy), Divine Insight (Discipline), Shadowy Insight
+  {spellId = 123267, spellId2 = 123266, spellId3 = 124430, size = 64, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
+  -- Spirit of Redemption (Holy), Insanity (Shadow)
+  {spellId = 27827, spellId2 = 132573, size = 64, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},
 
   },
 
