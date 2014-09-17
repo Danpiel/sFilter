@@ -1,8 +1,8 @@
-## Interface: 50400
+## Interface: 60000
 ## Title: |cFFFFFFFFs|r|cFFFF8C00F|r|cFFFFFFFFilter Spells|r
 ## Notes: Filter some stuff
 ## Author: Nils Ruesch, Danpiel
-## Version: 4.0.5
+## Version: 4.1.0b
 
 settings.lua
 sFilter.lua
