@@ -87,41 +87,43 @@ sFilter_Spells = {
   {spellId = 51124, spellId2 = 81340, spellId3 = 81141, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
   -- Rime (Freezing Fog)
   {spellId = 59052, spellId2 = 130735, spellId3 = 130736, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},
+
   },
 
   ["DRUID"] = {
 
-  -- Barkskin
-  {spellId = 22812, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 37}},
   -- Survival Instincts
-  {spellId = 61336, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 37}},
-  -- Frenzied Regeneration
-  {spellId = 22842, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 37}},
+  {spellId = 61336, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 37}},
+  -- Bristling Fur, Pulverize
+  {spellId = 155835, spellId2 = 158792, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 37}},
+  -- Barkskin
+  {spellId = 22812, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 37}},
+  -- Savage Defence
+  {spellId = 132402, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
 
-  -- Faerie Fire (Feral), Faerie Fire
-  {spellId = 770, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
-  -- Mangle
-  {spellId = 33878, size = 32, unitId = "target", isMine = "all", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
+  -- Faerie Fire, Faerie Swarm
+  {spellId = 770, spellId2 = 102355, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
   -- Savage roar
-  {spellId = 52610, size = 32, unitId = "player", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
-  -- Eclipse Solar, Eclipse Lunar
-  {spellId = 48517, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
-  -- Enrage
-  {spellId = 5229, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
+  {spellId = 52610, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
+  -- Lunar Peak, Solar Peak, Bloodtalons
+  {spellId = 171743, spellId2 = 171744, spellId3 = 145152, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
+  -- Dream of Cenarius
+  {spellId = 145162, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
 
-  -- Moonfire, Lacirate, Rake
-  {spellId = 8921, spellId2 = 33745, spellId3 = 1822, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
-  -- Insect Swarm, Rip
-  {spellId = 5570, spellId2 = 1079, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
-  -- Lunar Shower (Balance)
-  {spellId = 81192, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
+  -- Moonfire, Lacirate
+  {spellId = 8921, spellId2 = 33745, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
+  -- Rip (Feral), Thrash (Guardian), Stellar Flare (Balance)
+  {spellId = 1079, spellId2 = 77758, spellId3 = 152221, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
+  -- Tooth and Claw (Guardian), Rake
+  {spellId = 135286, spellId2 = 1822, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
   -- Entangling Roots
-  {spellId = 339, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
+  {spellId = 339, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
 
-  -- Shooting Stars (Starsurge instant), Predator's Swiftness
-  {spellId = 93400, spellId2 = 69369, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
-  -- Omen of Clarity
-  {spellId = 16870, spellId2 = 48518, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},
+  -- Predator's Swiftness, Lunar Empowerment, Solar Empowerment
+  {spellId = 69369, spellId2 = 164547, spellId3 = 164545, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
+  -- Clearcasting, Empowered Moonkin
+  {spellId = 16870, spellId2 = 157228, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},
+
   },
 
   ["HUNTER"] = {
@@ -170,6 +172,10 @@ sFilter_Spells = {
   {spellId = 118, spellId2 = 28272, spellId3 = 61780, size = 32, unitId = "target", isMine = "1", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
   -- Polymorph - Black Cat, Rabbit, Turtle
   {spellId = 61305, spellId2 = 61721, spellId3 = 28271, size = 32, unitId = "target", isMine = "1", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
+  -- Polymorph - Penguin, Monkey, Polar Bear Cub
+  {spellId = 161355, spellId2 = 161354, spellId3 = 161353, size = 32, unitId = "target", isMine = "1", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
+  -- Polymorph - Peacock, Porcupine
+  {spellId = 161355, spellId2 = 126819, size = 32, unitId = "target", isMine = "1", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
 
   -- Combustion (Fire)
   {spellId = 83853, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
@@ -195,6 +201,7 @@ sFilter_Spells = {
   {spellId = 44544, spellId2 = 48108, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
   -- Brain Freeze (Frost),  Cauterize (Fire)
   {spellId = 57761, spellId2 = 87023, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},
+
   },
 
   ["PALADIN"] = {
