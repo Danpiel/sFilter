@@ -186,8 +186,8 @@ sFilter_Spells = {
 
   -- Living Bomb, Nether Tempest
   {spellId = 44457, spellId2 = 114923, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
-  -- Slow (Arcane), Ignite (Fire)
-  {spellId = 31589, spellId2 = 12654, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
+  -- Ignite (Fire)
+  {spellId = 12654, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
   -- Pyroblast debuff (Fire)
   {spellId = 11366, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
   -- Meteor (Fire)
