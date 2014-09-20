@@ -200,6 +200,36 @@ sFilter_Spells = {
 
   },
 
+  ["MONK"] = {
+
+  -- Fortifying Brew
+  {spellId = 120954, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 37}},
+  -- Dampen Harm, Diffuse Magic
+  {spellId = 122278, spellId2 = 122783, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 37}},
+  -- Elusive Brew
+  {spellId = 115308, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 37}},
+  -- Guard
+  {spellId = 115295, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
+
+  -- Light Stagger, Moderate Stagger, Heavy Stagger
+  {spellId = 124275, spellId2 = 124274, spellId3 = 124273, size = 32, unitId = "player", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
+  -- Tigereye Brew, Mana Tea
+  {spellId = 125195, spellId2 = 115867, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
+  -- Shuffle, Tiger Strikes
+  {spellId = 115307, spellId2 = 120273, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
+
+  -- Tiger Power
+  {spellId = 125359, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
+  -- Rising Sun Kick
+  {spellId = 130320, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
+  -- Death Note
+  {spellId = 121125, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
+
+  -- Combo Breaker: Tiger Palm, Combo Breaker: Blackout Kick, Combo Breaker: Chi Explosion
+  {spellId = 118864, spellId2 = 116768, spellId3 = 159407, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
+
+  },
+
   ["PALADIN"] = {
 
   -- Guardian of Ancient Kings (Protection)
