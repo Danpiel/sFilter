@@ -257,10 +257,10 @@ sFilter_Spells = {
   -- Forbearance
   {spellId = 25771, size = 32, unitId = "player", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
 
-  -- Hand of Light (Retrobution), Grand Crusader (Protection), Infusion of Light (Holy)
+  -- Divine Purpose (Retribution), Grand Crusader (Protection), Infusion of Light (Holy)
   {spellId = 90174, spellId2 = 85416, spellId3 = 54149, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
-  -- Art of War (Retrobution), Enhanced Holy Shock (Holy)
-  {spellId = 59578, spellId2 = 160002, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},
+  -- Art of War (Retribution), Enhanced Holy Shock (Holy), Divine Crusader (Retribution)
+  {spellId = 59578, spellId2 = 160002, spellId3 = 144595, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},
 
   },
 
