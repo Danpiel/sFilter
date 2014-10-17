@@ -33,7 +33,7 @@ local function sFilter_CreateFrame(data)
                     self.found = true
                     self.icon:SetTexture(icon)
                     self.count:SetText(count>1 and count or "")
-					--if (duration) then
+					if (duration) then
                     if(duration>=0) then
                         self.cooldown:Show()
                         CooldownFrame_SetTimer(self.cooldown, expirationTime-duration, duration, 1)
