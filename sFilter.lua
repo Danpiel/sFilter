@@ -78,8 +78,8 @@ local function sFilter_CreateFrame(data)
         frame:SetScript("OnMouseUp", function(self,arg1)
             self:StopMovingOrSizing()
             if(arg1=="LeftButton") then
-                local x, y = self:GetCenter()
-                print(format("s|cFFFF8C00F|r|cFFFFFFFFfilter|r: setPoint for %s (%s): {\"%s\", UIParent, \"%s\", %s, %s}", data.spellId, spellName, "CENTER", "CENTER", floor(x + 0.5), floor(y + 0.5)))
+                local point, relativeTo, relativePoint, xOffset, yOffset = self:GetPoint(index)
+                print(format("s|cFFFF8C00F|r|cFFFFFFFFfilter|r: setPoint for %s (%s): {\"%s\", UIParent, \"%s\", %s, %s}", data.spellId, spellName, point, relativePoint, floor(xOffset + 0.5), floor(yOffset + 0.5)))
             end
         end)
     end
