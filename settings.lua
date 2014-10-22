@@ -178,8 +178,8 @@ sFilter_Spells = {
   {spellId = 36032, size = 32, unitId = "player", isMine = "all", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
   -- Arcane Missiles! (Arcane)
   {spellId = 79683, size = 32, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
-  -- Incanter's Flow
-  {spellId = 116267, size = 32, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
+  -- Incanter's Flow, Rune of Power
+  {spellId = 116267, spellId2 = 116014,size = 32, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
   -- Deep Freeze (Frost), Slow (Arcane), Frostfire bolt
   {spellId = 44572, spellId2 = 31589, spellId3 = 44614, size = 32, unitId = "target", isMine = "all", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
 
