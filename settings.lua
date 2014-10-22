@@ -67,8 +67,7 @@ sFilter_Spells = {
   {spellId = 63560, size = 32, unitId = "pet", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
   -- Bone Shield
   {spellId = 49222, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
-  -- Soul Reaper (Frost), Soul Reaper (Unholy)
-  {spellId = 130735, spellId2 = 130736, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
+
   -- Scent of Blood (Blood)
   {spellId = 50421, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
   -- Anti-magic Shell and zone
@@ -80,8 +79,8 @@ sFilter_Spells = {
   {spellId = 55078, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
   -- Breath of Sindragosa
   {spellId = 155166, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
-  -- Blood Tap
-  {spellId = 114851, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
+  -- Soul Reaper (Frost), Soul Reaper (Unholy)
+  {spellId = 130735, spellId2 = 130736, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
 
   -- Killing Machine (Frost), Sudden Doom (Unholy), Crimson Scourge (Blood)
   {spellId = 51124, spellId2 = 81340, spellId3 = 81141, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
@@ -257,10 +256,10 @@ sFilter_Spells = {
   -- Forbearance
   {spellId = 25771, size = 32, unitId = "player", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
 
-  -- Hand of Light (Retrobution), Grand Crusader (Protection), Infusion of Light (Holy)
+  -- Divine Purpose (Retribution), Grand Crusader (Protection), Infusion of Light (Holy)
   {spellId = 90174, spellId2 = 85416, spellId3 = 54149, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
-  -- Art of War (Retrobution), Enhanced Holy Shock (Holy)
-  {spellId = 59578, spellId2 = 160002, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},
+  -- Art of War (Retribution), Enhanced Holy Shock (Holy), Divine Crusader (Retribution)
+  {spellId = 59578, spellId2 = 160002, spellId3 = 144595, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},
 
   },
 
