@@ -3,6 +3,7 @@
 ## Notes: Filter some stuff
 ## Author: Nils Ruesch, Danpiel
 ## Version: 4.1.2
+## OptionalDeps: Tukui, ElvUI
 
 settings.lua
 sFilter.lua

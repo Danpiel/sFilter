@@ -99,6 +99,13 @@ local function sFilter_CreateFrame(data)
     frame.cooldown:SetReverse(true)
     frame.cooldown:SetAllPoints(frame.icon)
 
+    local _, _, _, enabled = GetAddOnInfo("ElvUI")
+    if enabled then
+      local E = unpack(ElvUI);
+      E:RegisterCooldown(frame.cooldown)
+    end
+    enabled = nil
+
     frame.overlay = frame:CreateTexture(nil, "OVERLAY")
     frame.overlay:SetTexture("Interface\\AddOns\\sFilter\\Textures\\gloss")
     frame.overlay:SetAllPoints(frame)
