@@ -77,24 +77,28 @@ sFilter_Spells = {
 
   -- Faerie Fire, Faerie Swarm
   {spellId = 770, spellId2 = 102355, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
-  -- Savage roar
-  {spellId = 52610, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
-  -- Lunar Peak, Solar Peak, Bloodtalons
-  {spellId = 171743, spellId2 = 171744, spellId3 = 145152, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
-  -- Dream of Cenarius
-  {spellId = 145162, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
+  -- Savage roar,  Solar Peak
+  {spellId = 52610, spellId2 = 171744, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
+  -- Lunar Peak, Bloodtalons
+  {spellId = 171743, spellId2 = 145152, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
+  -- Dream of Cenarius, Predator's Swiftness
+  {spellId = 145162, spellId2 = 69369, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
 
   -- Moonfire, Lacirate
   {spellId = 8921, spellId2 = 33745, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
-  -- Rip (Feral), Thrash (Guardian), Stellar Flare (Balance)
-  {spellId = 1079, spellId2 = 77758, spellId3 = 152221, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
-  -- Tooth and Claw (Guardian), Rake
-  {spellId = 135286, spellId2 = 155722, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
-  -- Entangling Roots
-  {spellId = 339, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
+  -- Rip (Feral), Stellar Flare (Balance)
+  {spellId = 1079, spellId2 = 152221, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
+  -- Tooth and Claw (Guardian), Solar Empowerment
+  {spellId = 135286, size = 32, spellId2 = 164545, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
+  -- Rake
+  {spellId = 155722, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
+  -- Entangling Roots, Thrash
+  {spellId = 339, spellId2 = 77758, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
+  -- Lunar Empowerment
+  {spellId = 164547, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
 
   -- Predator's Swiftness, Lunar Empowerment, Solar Empowerment
-  {spellId = 69369, spellId2 = 164547, spellId3 = 164545, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
+  --{spellId = 69369, spellId2 = 164547, spellId3 = 164545, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
   -- Clearcasting, Empowered Moonkin
   {spellId = 16870, spellId2 = 157228, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},
 
