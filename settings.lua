@@ -175,30 +175,32 @@ sFilter_Spells = {
   -- Polymorph - Peacock, Porcupine
   {spellId = 161355, spellId2 = 126819, size = 32, unitId = "target", isMine = "1", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
 
-  -- Combustion (Fire)
-  {spellId = 83853, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
-  -- Arcane Charge
-  {spellId = 36032, size = 32, unitId = "player", isMine = "all", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
-  -- Arcane Missiles! (Arcane)
-  {spellId = 79683, size = 32, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
+  -- Arcane Missiles!, Heating Up, Ray of Frost (Damage Multiplier), Bone Chilling
+  {spellId = 79683, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
+  {spellId = 48107, spellId2 = 208141, spellId3 = 205766, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
+  -- Chain Reaction, Mark of Aluneth
+  {spellId = 195418, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
+  {spellId = 224968, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
+  -- Icecles, Quickening
+  {spellId = 205473, spellId2 = 198924, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
   -- Incanter's Flow, Rune of Power
-  {spellId = 116267, spellId2 = 116014,size = 32, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
-  -- Deep Freeze (Frost), Slow (Arcane), Frostfire bolt
-  {spellId = 44572, spellId2 = 31589, spellId3 = 44614, size = 32, unitId = "target", isMine = "all", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
+  {spellId = 116267, spellId2 = 116040, size = 32, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
 
-  -- Living Bomb, Nether Tempest
-  {spellId = 44457, spellId2 = 114923, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
-  -- Ignite (Fire)
-  {spellId = 12654, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
-  -- Pyroblast debuff (Fire)
-  {spellId = 11366, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
-  -- Meteor (Fire)
-  {spellId = 155158, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
+  -- Living Bomb, Nether Tempest, Frost Bomb
+  {spellId = 217694, spellId2 = 114923, spellId3 = 112948, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
+  -- Enhanced Pyrotechnics, Slow
+  {spellId = 157644, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
+  {spellId = 31589, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
+  -- Pyretic Incantation, Touch of Magi
+  {spellId = 210824,  size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
+  {spellId = 194329,  size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
+  -- Meteor (Fire), Erosion
+  {spellId = 155158, spellId2 = 210134, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
 
-  -- Fingers of Frost (Frost), Hot Streak (Fire)
+  -- Fingers of Frost, Hot Streak
   {spellId = 44544, spellId2 = 48108, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
-  -- Brain Freeze (Frost),  Cauterize (Fire)
-  {spellId = 57761, spellId2 = 87023, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},
+  -- Brain Freeze
+  {spellId = 190446, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},
 
   },
 
