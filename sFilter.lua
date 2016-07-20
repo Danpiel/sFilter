@@ -36,7 +36,7 @@ local function sFilter_CreateFrame(data)
 					if (duration) then
                     if(duration>=0) then
                         self.cooldown:Show()
-                        CooldownFrame_SetTimer(self.cooldown, expirationTime-duration, duration, 1)
+                        CooldownFrame_Set(self.cooldown, expirationTime-duration, duration, 1)
                     else
                         self.cooldown:Hide()
                     end
