@@ -298,35 +298,40 @@ sFilter_Spells = {
 
   ["ROGUE"] = {
 
-  -- Evasion
-  {spellId = 5277, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 37}},
+  -- Evasion, Riposte
+  {spellId = 5277, spellId2 = 199754,size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 37}},
   -- Cloak of Shadows
   {spellId = 31224, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 37}},
   -- Feint
   {spellId = 1966, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 37}},
-  -- Slice and Dice
-  {spellId = 5171, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
+  -- Slice and Dice, Enveloping Shadows
+  {spellId = 5171, spellId2 = 206237, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
 
-  -- Revealing Strike (Combat), Vendetta (Assassination)
-  {spellId = 84617, spellId2 = 79140, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
+  -- Shadow Dance, Curse of the Dreadblades
+  {spellId = 185422, spellId2 = 202665, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
   -- Cheap Shot, Gouge, Kidney Shot
   {spellId = 1833, spellId2 = 1776, spellId3 = 408, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
-  -- Recuperate
-  {spellId = 73651, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
-  -- Shallow Insight, Moderate Insight, Deep Insight
-  {spellId = 84745, spellId2 = 84746, spellId3 = 84747, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
+  -- Finality: Nightblade, Vendetta
+  {spellId = 197498, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
+  {spellId = 79140, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
+  -- Finality: Eviscerate. Blade Flurry
+  {spellId = 197496, spellId2 = 13877, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
 
-  -- Deadly Poison, Cripling Poison, Wound Poison
-  {spellId = 67710, spellId2 = 3409, spellId3 = 8680, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
-  -- Rupture
-  {spellId = 1943, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
-  -- Crimson Tempest
-  {spellId = 122233, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
-  -- Garrote
-  {spellId = 3409, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
+  -- Agonizing Poison, Deadly Poison, Ghostly Strike
+  {spellId = 200803, spellId2 = 67710, spellId3 = 196937, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
+  -- Rupture, Nightblade
+  {spellId = 1943, spellId2 = 195452, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
+  -- Marked for Death, Garrote
+  {spellId = 137619, spellId2 = 703, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
+  --  Jolly Roger, Shark Infested Waters, Grand Melee, Broadsides, Buried Treasure
+  {spellId = 193356, spellId2 = 193357, spellId3 = 193358, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
+  {spellId = 193356, spellId2 = 199600, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
+  -- Surge of Toxins
+  {spellId = 192425, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
 
-  -- Blindside
-  {spellId = 121153, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
+  -- Opportunity
+  {spellId = 195627, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
+
   },
 
   ["SHAMAN"] = {
