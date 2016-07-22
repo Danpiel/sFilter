@@ -207,25 +207,29 @@ sFilter_Spells = {
   {spellId = 122278, spellId2 = 122783, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 37}},
   -- Elusive Brew
   {spellId = 115308, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 37}},
-  -- Guard
-  {spellId = 115295, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
+  -- Touch of Karma
+  {spellId = 125174, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
+  -- Exploding Keg
+  {spellId = 214326, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
 
   -- Light Stagger, Moderate Stagger, Heavy Stagger
   {spellId = 124275, spellId2 = 124274, spellId3 = 124273, size = 32, unitId = "player", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
-  -- Tigereye Brew, Mana Tea
-  {spellId = 125195, spellId2 = 115867, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
-  -- Shuffle, Tiger Strikes
-  {spellId = 115307, spellId2 = 120273, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
+  -- Lifecycles (Vivify), Lifecycles (Enveloping Mist), Elusive Brawler
+  {spellId = 197916, spellId2 = 197919, spellId3 = 195630, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
+  -- Refreshing Jade Wind
+  {spellId = 196725, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
 
-  -- Tiger Power
-  {spellId = 125359, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
-  -- Rising Sun Kick
-  {spellId = 130320, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
-  -- Death Note
-  {spellId = 121125, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
+  -- Transfer the Power, Ironskin Brew
+  {spellId = 195321, spellId2 = 215479, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
+  -- Mark of the Crane
+  {spellId = 228287, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
+  -- Hit Combo
+  {spellId = 196741, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
+  -- Eye of the Tiger
+  {spellId = 196608, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
 
-  -- Combo Breaker: Tiger Palm, Combo Breaker: Blackout Kick, Combo Breaker: Chi Explosion
-  {spellId = 118864, spellId2 = 116768, spellId3 = 159407, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
+  -- Uplifting Trance, Blackout Kick!
+  {spellId = 197206, spellId2 = 116768, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
   -- Innervate
   {spellId = 29166, size = 64, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},
 
