@@ -369,33 +369,37 @@ sFilter_Spells = {
   {spellId = 108416, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 37}},
   -- Dark Regeneration
   {spellId = 108359, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 37}},
+  -- Seed of Corruption
+  {spellId = 27243, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
 
-  -- Backdraft (Destruction)
-  {spellId = 117828, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
+  -- Backdraft (Destruction), Compounding Horror
+  {spellId = 117828, spellId2 = 199281, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
   -- Demonbolt
   {spellId = 157695, size = 32, unitId = "player", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
   -- Fear, Blood Horror, Howl of Terror
   {spellId = 118699, spellId2 = 137143, spellId3 = 5484, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
-  -- Life Tap (Glyphed debuff)
-  {spellId = 1454, size = 32, unitId = "player", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
+  -- Mana Tap
+  {spellId = 196104, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
+  -- Deadwind Harvester, Tormented Souls
+  {spellId = 216708, spellId2 = 216695, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
 
-  -- Immolation, Unstable Affliction, Hand of Gul'Dan
-  {spellId = 348, spellId2 = 30108, spellId3 = 47960, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
+  -- Immolation, Unstable Affliction, Doom
+  {spellId = 348, spellId2 = 30108, spellId3 = 603, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
   -- Corruption, Havoc (Destruction)
   {spellId = 172, spellId2 = 80240, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
-  -- Seed of Corruption, Agony, Doom (Demonology)
-  {spellId = 27243, spellId2 = 980, spellId3 = 603, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
-  -- Rain of Fire
-  {spellId = 104232, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
-  -- Haunt
-  {spellId = 48181, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
-  -- Fire and Brimstone
-  {spellId = 108683, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
+  -- Demonic Empowerment
+  {spellId = 193396, size = 32, unitId = "pet", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
+  -- Agony, Eradication
+  {spellId = 980, spellId2 = 196414, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
+  -- Siphon Life
+  {spellId = 63106, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
+  -- Conflagration of Chaos
+  {spellId = 196546, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
 
-  -- Kil'Jaeden's Cunning
-  {spellId = 137587, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
+  -- Shadowy Inspiration
+  {spellId = 196606, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
   -- Molten Core (Demonology), Soul Swap
-  {spellId = 122355, spellId2 = 86211, size = 64, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},
+  --{spellId = 122355, spellId2 = 86211, size = 64, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},
 
   },
 
