@@ -85,41 +85,37 @@ sFilter_Spells = {
 
   ["DRUID"] = {
 
-  -- Survival Instincts
-  {spellId = 61336, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 37}},
-  -- Bristling Fur, Pulverize
-  {spellId = 155835, spellId2 = 158792, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 37}},
   -- Barkskin
-  {spellId = 22812, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 37}},
-  -- Savage Defence
-  {spellId = 132402, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
+  {spellId = 22812, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 37}},
+  -- Mark of Ursol
+  {spellId = 192083, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 37}},
+  -- Survival Instincts
+  {spellId = 61336, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 37}},
+  -- Ironbark, Rage of the Sleeper
+  {spellId = 102342, spellId2 = 200851, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
 
-  -- Faerie Fire, Faerie Swarm
-  {spellId = 770, spellId2 = 102355, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
-  -- Savage roar,  Solar Peak
-  {spellId = 52610, spellId2 = 171744, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
-  -- Lunar Peak, Bloodtalons
-  {spellId = 171743, spellId2 = 145152, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
-  -- Dream of Cenarius, Predator's Swiftness
-  {spellId = 145162, spellId2 = 69369, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
+  -- Abundance, Ironfur
+  {spellId = 207640, spellId2 = 192081, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
+  -- Savage roar, Solar Peak, Frenzied Regeneration
+  {spellId = 52610, spellId2 = 171744, spellId3 = 22842, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
+  -- Lunar Empowerment, Pulverize, Bloodtalons
+  {spellId = 164547, spellId2 = 158792, spellId3 = 145152, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
+  -- Solar Empowerment, Predator's Swiftness, Guardian of Elune
+  {spellId = 164545, spellId2 = 69369, spellId3 = 213680, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
 
-  -- Moonfire, Lacirate
-  {spellId = 8921, spellId2 = 33745, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
-  -- Rip (Feral), Stellar Flare (Balance)
+  -- Moonfire
+  {spellId = 8921, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
+  -- Rip, Sunfire
   {spellId = 1079, spellId2 = 152221, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
-  -- Tooth and Claw (Guardian), Solar Empowerment
-  {spellId = 135286, size = 32, spellId2 = 164545, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
-  -- Rake
-  {spellId = 155722, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
+  -- Rake, Stellar Flare
+  {spellId = 155722, spellId2 = 202347, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
   -- Entangling Roots, Thrash
   {spellId = 339, spellId2 = 77758, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
-  -- Lunar Empowerment
-  {spellId = 164547, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
 
-  -- Predator's Swiftness, Lunar Empowerment, Solar Empowerment
-  --{spellId = 69369, spellId2 = 164547, spellId3 = 164545, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
-  -- Clearcasting, Empowered Moonkin
-  {spellId = 16870, spellId2 = 157228, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},
+  -- Soul of the Forest, Innervate, Galactic Guardian
+  {spellId = 114108, spellId2 = 29166, spellId3 = 213708, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
+  -- Clearcasting, Empowered Moonkin, Mangle!
+  {spellId = 16870, spellId2 = 157228, spellId3 = 93622, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},
 
   },
 
@@ -230,6 +226,8 @@ sFilter_Spells = {
 
   -- Combo Breaker: Tiger Palm, Combo Breaker: Blackout Kick, Combo Breaker: Chi Explosion
   {spellId = 118864, spellId2 = 116768, spellId3 = 159407, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
+  -- Innervate
+  {spellId = 29166, size = 64, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},
 
   },
 
@@ -263,6 +261,8 @@ sFilter_Spells = {
 
   -- Divine Purpose
   {spellId = 216411, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
+  -- Innervate
+  {spellId = 29166, size = 64, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},
 
   },
 
@@ -291,8 +291,8 @@ sFilter_Spells = {
   -- Voidform, Lingering Insanity
   {spellId = 194249, spellId2 = 197937, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
 
-  -- Shadowy Insight
-  {spellId = 124430, size = 64, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
+  -- Shadowy Insight, Innervate
+  {spellId = 124430, spellId2 = 29166, size = 64, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
 
   },
 
@@ -356,8 +356,8 @@ sFilter_Spells = {
 
   -- Lava Surge, Hot hand
   {spellId = 77762, spellId2 = 215785, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
-  -- Stormbringer
-  {spellId = 201846, size = 64, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},
+  -- Stormbringer, Innervate
+  {spellId = 201846, spellId2 = 29166, size = 64, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},
 
   },
 
