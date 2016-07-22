@@ -2,7 +2,7 @@
 ## Title: |cFFFFFFFFs|r|cFFFF8C00F|r|cFFFFFFFFilter Spells|r
 ## Notes: Filter useful buffs and debuffs
 ## Author: Nils Ruesch, Danpiel
-## Version: 4.3.2
+## Version: 5.0.0
 ## OptionalDeps: Tukui, ElvUI
 
 settings.lua
