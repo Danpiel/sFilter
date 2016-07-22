@@ -409,33 +409,35 @@ sFilter_Spells = {
   {spellId = 871, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 37}},
   -- Last Stand, Die by the Sword
   {spellId = 12975, spellId2 = 118038, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 37}},
-  -- Ravager (Protection)
-  {spellId = 152277, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 37}},
+  -- Demoralizing Shout
+  {spellId = 125565, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 37}},
   -- Enraged Regeneration
-  {spellId = 55694, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
+  {spellId = 184364, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
 
-  -- Shield Barrier
-  {spellId = 112048, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
-  -- Shield Block, Shield Charge
-  {spellId = 2565, spellId2 = 169667, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
-  -- Hamstring, Piercing Howl, Charge (root), Warbringer
-  {spellId = 1715, spellId2 = 12323, spellId3 = 7922, size = 32, unitId = "target", isMine = "all", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
+  -- Ignore Pain, Juggernaut, Focused Rage
+  {spellId = 190345, spellId2 = 201009, spellId3 = 207982, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
+  -- Shield Block, Berserking
+  {spellId = 2565, spellId2 = 200953, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
+  -- Ravager
+  {spellId = 152277, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
+  -- Hamstring, Piercing Howl
+  {spellId = 1715, spellId2 = 12323, size = 32, unitId = "target", isMine = "all", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
 
-  -- Raging Blow! (Fury), Unyielding Strikes (Protection)
-  {spellId = 131116, spellId2 = 169686, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
-  -- Rend (Arms)
+  -- Enrage
+  {spellId = 184362, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
+  -- Rend
   {spellId = 772, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
-  -- Colossus Smash debuff
-  {spellId = 86346, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
-  -- Bloodsurge (Fury)
-  {spellId = 46916, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
-  -- Meat Cleaver (Fury)
-  {spellId = 85739, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
+  -- Colossus Smash
+  {spellId = 208086, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
+  -- Enrage
+  {spellId = 206333, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
+  -- Shattered Defenses, Frenzy
+  {spellId = 209706, spellId2 = 202539, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
+  -- Cleave, Wrecking Ball
+  {spellId = 188923, spellId2 = 215570, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
 
-  -- Sword and Board (Protection),Sudden Death
-  {spellId = 50227, spellId2 = 52437,size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
-  -- Ultimatum
-  {spellId = 122510, size = 64, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},
+  -- Overpower!
+  {spellId = 60503, size = 64, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},
 
   },
 }
