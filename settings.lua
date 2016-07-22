@@ -125,31 +125,35 @@ sFilter_Spells = {
 
   ["HUNTER"] = {
 
-  -- Focus Fire (Beastmaster)
-  {spellId = 82692, size = 32, unitId = "pet", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 37}},
-  -- Bestial Wrath (Beastmaster)
-  {spellId = 19574, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 37}},
-  -- Hunter's Mark
-  {spellId = 1130, size = 32, unitId = "target", isMine = "all", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
+  -- Making Targets, Mongoose Fury
+  {spellId = 223138, spellId2 = 190931, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 37}},
+  -- Bestial Wrath, Mok'Nathal Tactics
+  {spellId = 19574, spellId2 = 201081, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 37}},
+  -- Steady Focus, Instincts of the Mongoose, Instincts of the Cheetah, Instincts of the Raptor
+  {spellId = 193534, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 37}},
+  {spellId = 204333, spellId2 = 204324, spellId3 = 204321, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 37}},
+  -- Volley
+  {spellId = 194386, size = 32, unitId = "target", isMine = "all", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
 
-  -- Steady Focus
-  {spellId = 177668, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
-  -- Sniper Training (Marksman)
-  {spellId = 168811, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
+  -- Hunter's Mark,
+  {spellId = 185365, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
+  {spellId = 227272, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
+  -- Trick Shot
+  {spellId = 227272, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
   -- Freezing Trap, Ice trap
   {spellId = 3355, spellId2 = 71647, size = 32, unitId = "target", isMine = "all", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
 
-  -- Black Arrow
-  {spellId = 3674, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
-  -- Frenzy Effect (Beastmaster)
-  {spellId = 19615, size = 32, unitId = "pet", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
-  -- Explosive Shot
-  {spellId = 53301, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
+  -- Vulnerable, Lacerate
+  {spellId = 187131, spellId2 = 185855, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
+  -- Black Arrow, True Aim, On the Trail
+  {spellId = 194599, spellId2 = 199803, spellId3 = 204081, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
+  -- Serpent Sting
+  {spellId = 118253, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
   -- Wyvern Sting
   {spellId = 19386, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
 
-  -- Thrill of the Hunt, Lock and Load
-  {spellId = 34720, spellId2 = 168980, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
+  -- One wtih the Pack, Lock and Load
+  {spellId = 185791, spellId2 = 194594, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
 
   },
 
