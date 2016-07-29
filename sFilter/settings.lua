@@ -327,9 +327,10 @@ sFilter_Spells = {
   {spellId = 1943, spellId2 = 195452, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
   -- Marked for Death, Garrote
   {spellId = 137619, spellId2 = 703, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
-  --  Jolly Roger, Shark Infested Waters, Grand Melee, Broadsides, Buried Treasure
+  -- Broadsides, Shark Infested Waters, Grand Melee
   {spellId = 193356, spellId2 = 193357, spellId3 = 193358, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
-  {spellId = 193356, spellId2 = 199600, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
+  -- Jolly Roger, Buried Treasure, True Bearing
+  {spellId = 199603, spellId2 = 199600, spellId3 = 193359, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
   -- Surge of Toxins
   {spellId = 192425, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
 
@@ -424,7 +425,7 @@ sFilter_Spells = {
   {spellId = 184364, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
 
   -- Ignore Pain, Juggernaut, Focused Rage
-  {spellId = 190345, spellId2 = 201009, spellId3 = 207982, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
+  {spellId = 190456, spellId2 = 201009, spellId3 = 207982, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
   -- Shield Block, Berserking
   {spellId = 2565, spellId2 = 200953, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
   -- Ravager
