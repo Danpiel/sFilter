@@ -341,8 +341,8 @@ sFilter_Spells = {
 
   ["SHAMAN"] = {
 
-  -- Astral Shift, E
-  {spellId = 108271,  size = 32, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 37}},
+  -- Astral Shift
+  {spellId = 108271, size = 32, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 37}},
   -- Earthshield totem
   {spellId = 201633, size = 32, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 37}},
 
@@ -351,10 +351,10 @@ sFilter_Spells = {
   {spellId = 194084, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
   -- Tidal Waves, Stormlash, Power of the Maelstrom
   {spellId = 53390, spellId2 = 195222, spellId3 = 191877, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
-  -- Spiritwalker's Grace, Frostband
-  {spellId = 79206, spellId2 = 196834, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
-  -- Earthen Spike, Lightning Rod, Landslide
-  {spellId = 188089, spellId2 = 197209, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
+  -- Spiritwalker's Grace, Earthen Spike
+  {spellId = 79206, spellId2 = 188089, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
+  -- Frostband, Lightning Rod, Landslide
+  {spellId = 196834, spellId2 = 197209, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
   {spellId = 202004, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
 
   -- Unleashed life, Rainfall
@@ -439,8 +439,8 @@ sFilter_Spells = {
   {spellId = 772, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
   -- Colossus Smash
   {spellId = 208086, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
-  -- Enrage
-  {spellId = 206333, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
+  -- Taste for Blood, Vengeance: Focused Rage, Vengeance: Ignore Pain
+  {spellId = 206333, spellId2 = 202573, spellId3 = 202574, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
   -- Shattered Defenses, Frenzy
   {spellId = 209706, spellId2 = 202539, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
   -- Cleave, Wrecking Ball
