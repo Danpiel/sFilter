@@ -351,11 +351,12 @@ sFilter_Spells = {
   {spellId = 194084, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
   -- Tidal Waves, Stormlash, Power of the Maelstrom
   {spellId = 53390, spellId2 = 195222, spellId3 = 191877, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
-  -- Spiritwalker's Grace, Earthen Spike
-  {spellId = 79206, spellId2 = 188089, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
-  -- Frostband, Lightning Rod, Landslide
-  {spellId = 196834, spellId2 = 197209, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
-  {spellId = 202004, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
+  -- Spiritwalker's Grace, Landslide, Earthen Spike
+  {spellId = 79206, spellId2 = 202004, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
+  {spellId = 188089, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
+  -- Lightning Rod, Frostband
+  {spellId = 197209, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
+  {spellId = 196834, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
 
   -- Unleashed life, Rainfall
   {spellId = 73685, spellId2 = 215864, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
@@ -446,8 +447,8 @@ sFilter_Spells = {
   -- Cleave, Wrecking Ball
   {spellId = 188923, spellId2 = 215570, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
 
-  -- Overpower!
-  {spellId = 60503, size = 64, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},
+  -- Overpower!, Massacre
+  {spellId = 60503, spellId2 = 206316, size = 64, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},
 
   },
 }
