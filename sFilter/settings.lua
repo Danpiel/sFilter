@@ -279,12 +279,12 @@ sFilter_Spells = {
 
   -- Borrowed Time, Void Ray
   {spellId = 197763, spellId2 = 205372, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
-  -- Rapture
-  {spellId = 47536, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
-  -- Twist of Fate
-  {spellId = 123254, size = 32, unitId = "player", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
+  -- Rapture, Twist of Fate
+  {spellId = 47536, spellId2 = 123254, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
+  -- Voidform, Lingering Insanity
+  {spellId = 194249, spellId2 = 197937, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
   -- Angelic Feather
-  {spellId = 121557, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
+  {spellId = 121557, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
 
   -- Vampiric Touch, Schism
   {spellId = 34914, spellId2 = 214621, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
@@ -292,8 +292,8 @@ sFilter_Spells = {
   {spellId = 589, spellId2 = 204213, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
   -- Shadow Word: Void
   {spellId = 205351, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
-  -- Voidform, Lingering Insanity
-  {spellId = 194249, spellId2 = 197937, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
+  -- Mind Spike
+  {spellId = 217673, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
 
   -- Shadowy Insight, Innervate
   {spellId = 124430, spellId2 = 29166, size = 64, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
