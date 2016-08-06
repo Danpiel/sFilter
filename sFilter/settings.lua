@@ -179,7 +179,7 @@ sFilter_Spells = {
   -- Icecles, Quickening
   {spellId = 205473, spellId2 = 198924, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
   -- Incanter's Flow, Rune of Power
-  {spellId = 116267, spellId2 = 116040, size = 32, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
+  {spellId = 116267, spellId2 = 116014, size = 32, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
 
   -- Living Bomb, Nether Tempest, Frost Bomb
   {spellId = 217694, spellId2 = 114923, spellId3 = 112948, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
