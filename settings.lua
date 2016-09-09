@@ -361,8 +361,8 @@ sFilter_Spells = {
 
   -- Unleashed life, Rainfall, Undulation
   {spellId = 73685, spellId2 = 215864, spellId3 = 216251, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
-  -- Cloudburst totem
-  {spellId = 157504, size = 32, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
+  -- Cloudburst totem, Stormkeeper
+  {spellId = 157504, spellId2 = 205495, size = 32, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
   -- Hex
   {spellId = 51514, size = 32, unitId = "target", isMine = "all", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
 
@@ -385,7 +385,7 @@ sFilter_Spells = {
   -- Seed of Corruption
   {spellId = 27243, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
 
-  -- Backdraft (Destruction), Compounding Horror
+  -- Backdraft, Compounding Horror
   {spellId = 117828, spellId2 = 199281, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
   -- Demonbolt
   {spellId = 157695, size = 32, unitId = "player", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
@@ -398,8 +398,8 @@ sFilter_Spells = {
 
   -- Immolation, Unstable Affliction, Doom
   {spellId = 348, spellId2 = 30108, spellId3 = 603, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
-  -- Corruption, Havoc (Destruction)
-  {spellId = 172, spellId2 = 80240, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
+  -- Corruption, Havoc, Shadowflame
+  {spellId = 172, spellId2 = 80240, spellId3 = 205181, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
   -- Demonic Empowerment
   {spellId = 193396, size = 32, unitId = "pet", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
   -- Agony, Eradication
@@ -409,8 +409,8 @@ sFilter_Spells = {
   -- Conflagration of Chaos
   {spellId = 196546, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
 
-  -- Shadowy Inspiration
-  {spellId = 196606, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
+  -- Shadowy Inspiration, Demonic Calling
+  {spellId = 196606, spellId2 = 205146, size = 64, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 148, -91}},
   -- Molten Core (Demonology), Soul Swap
   --{spellId = 122355, spellId2 = 86211, size = 64, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},
 
