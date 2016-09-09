@@ -359,8 +359,8 @@ sFilter_Spells = {
   -- Crash Lightning
   {spellId = 187878, size = 32, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
 
-  -- Unleashed life, Rainfall
-  {spellId = 73685, spellId2 = 215864, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
+  -- Unleashed life, Rainfall, Undulation
+  {spellId = 73685, spellId2 = 215864, spellId3 = 216251, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
   -- Cloudburst totem
   {spellId = 157504, size = 32, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
   -- Hex
