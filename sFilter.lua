@@ -14,7 +14,7 @@ local MyUnits = {
 }
 
 local function sFilter_CreateFrame(data)
-    local spellName, _, spellIcon = GetSpellInfo(data.spellId)
+    local spellName, spellIcon = GetSpellInfo(data.spellId)
     local frame = CreateFrame("Frame", "sFilter_" .. data.unitId .. "_" .. data.spellId, UIParent)
     frame:SetWidth(data.size)
     frame:SetHeight(data.size)
@@ -28,7 +28,7 @@ local function sFilter_CreateFrame(data)
             self.found = false
             self:SetAlpha(1)
             for i=1, 40 do
-                local name, rank, icon, count, debuffType, duration, expirationTime, caster, isStealable = UnitAura(data.unitId, i, data.filter)
+                local name, icon, count, debuffType, duration, expirationTime, caster, isStealable = UnitAura(data.unitId, i, data.filter)
                 if((data.isMine~=1 or MyUnits[caster]) and (name==GetSpellInfo(data.spellId) or (data.spellId2 and name==GetSpellInfo(data.spellId2)) or (data.spellId3 and name==GetSpellInfo(data.spellId3)))) then
                     self.found = true
                     self.icon:SetTexture(icon)
