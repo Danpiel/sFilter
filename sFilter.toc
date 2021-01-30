@@ -1,8 +1,8 @@
-## Interface: 80000
+## Interface: 90002
 ## Title: |cFFFFFFFFs|r|cFFFF8C00F|r|cFFFFFFFFilter Spells|r
 ## Notes: Filter useful buffs and debuffs
 ## Author: Nils Ruesch, Danpiel
-## Version: 5.1.0
+## Version: 9.0.0
 ## OptionalDeps: Tukui, ElvUI
 
 settings.lua
