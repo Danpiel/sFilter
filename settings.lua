@@ -172,21 +172,21 @@ sFilter_Spells = {
   -- Polymorph - Peacock, Porcupine
   {spellId = 161355, spellId2 = 126819, size = 32, unitId = "target", isMine = "1", filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
 
-  -- Arcane Missiles!, Heating Up, Ray of Frost (Damage Multiplier), Bone Chilling
+  -- Arcane Missiles!, Heating Up, Bone Chilling
   {spellId = 79683, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
   {spellId = 48107, spellId2 = 208141, spellId3 = 205766, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
   -- Chain Reaction, Displacement Beacon, Mark of Aluneth
   {spellId = 195418, spellId2 = 212799, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
   {spellId = 224968, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
-  -- Icecles, Quickening
-  {spellId = 205473, spellId2 = 198924, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
+  -- Quickening
+  {spellId = 198924, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
   -- Incanter's Flow, Rune of Power
   {spellId = 116267, spellId2 = 116014, size = 32, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
 
-  -- Living Bomb, Nether Tempest, Frost Bomb
-  {spellId = 217694, spellId2 = 114923, spellId3 = 112948, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
-  -- Enhanced Pyrotechnics, Slow
-  {spellId = 157644, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
+  -- Living Bomb, Nether Tempest, Winter's Chill
+  {spellId = 217694, spellId2 = 114923, spellId3 = 228358, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
+  -- Enhanced Pyrotechnics, Slow, Freezing Rain
+  {spellId = 157644, spellId2 = 270232, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
   {spellId = 31589, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
   -- Pyretic Incantation, Touch of Magi
   {spellId = 210824,  size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
@@ -451,7 +451,7 @@ sFilter_Spells = {
   {spellId = 188923, spellId2 = 215570, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, -37}},
 
   -- Overpower!, Massacre
-  {spellId = 60503, spellId2 = 206316, size = 64, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},
+  --{spellId = 60503, size = 64, unitId = "player", isMine = "all", filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 222, -91}},
 
   },
 }
