@@ -58,8 +58,8 @@ sFilter_Spells = {
   -- Anti-magic Shell
   {spellId = 48707, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 37}},
 
-  -- Death and Decay, Icy Talons, Bone Shield
-  {spellId = 188290, spellId2 = 194879, spellId3 = 195181, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
+  -- Icy Talons, Bone Shield
+  {spellId = 194879, spellId2 = 195181, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, 0}},
   -- Necrosis, Blood Shield
   {spellId = 63560, spellId2 = 77535, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
   -- Rune Tap
@@ -253,12 +253,13 @@ sFilter_Spells = {
   -- Infusion of Light, Bulwark of Order
   {spellId = 54149, spellId2 = 209388, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, 0}},
   -- Eye of Tyr
-  {spellId = 209202, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
+  {spellId = 209202, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, 0}},
+  -- Consecration (Protection)
+  {spellId = 188370, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 243, 0}},
 
   -- Judgment of the Light, Zeal
   {spellId = 196941, spellId2 = 217020, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 132, -37}},
-  -- Consecration (Protection), Execution Sentence, Judgment
-  {spellId = 188370, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
+  -- Execution Sentence, Judgment
   {spellId = 213757, spellId2 = 197277, size = 32, unitId = "target", isMine = 1, filter = "HARMFUL", setPoint = {"CENTER", UIParent, "CENTER", 169, -37}},
   -- Seal of Light
   {spellId = 202273, size = 32, unitId = "player", isMine = 1, filter = "HELPFUL", setPoint = {"CENTER", UIParent, "CENTER", 206, -37}},
