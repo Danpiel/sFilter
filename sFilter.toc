@@ -1,9 +1,25 @@
-## Interface: 90002
-## Title: |cFFFFFFFFs|r|cFFFF8C00F|r|cFFFFFFFFilter Spells|r
-## Notes: Filter useful buffs and debuffs
-## Author: Nils Ruesch, Danpiel
-## Version: 9.0.0
-## OptionalDeps: Tukui, ElvUI
+## Interface: 120100, 120105, 16001
+## Title: |cFFFFFFFFs|r|cFFFF8C00F|r|cFFFFFFFFilter|r
+## Notes: Shows the debuffs on your target and the buffs on you and your pet that matter for your rotation.
+## Notes-ruRU: Показывает нужные дебаффы на цели и баффы на себе/пете для оптимального урона.
+## Author: Danpiel (based on sFilter by Nils Ruesch and ALZA)
+## Version: 10.0.0
+## Category: Combat
+## IconTexture: Interface\Icons\Spell_Nature_FaerieFire
+## SavedVariables: sFilterDB, DSFilterDB
+## OptionalDeps: ElvUI
+## AddonCompartmentFunc: sFilter_OnAddonCompartmentClick
+## AddonCompartmentFuncOnEnter: sFilter_OnAddonCompartmentEnter
+## AddonCompartmentFuncOnLeave: sFilter_OnAddonCompartmentLeave
 
-settings.lua
-sFilter.lua
+Locales.lua
+Core.lua
+Serializer.lua
+Defaults.lua
+Profile.lua
+Skin.lua
+Tracker.lua
+Display.lua
+NativeAuras.lua
+CDMBridge.lua
+Options.lua
