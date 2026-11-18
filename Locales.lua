@@ -10,7 +10,8 @@ local L = setmetatable({}, {
 ns.L = L
 
 L.ICONS_HELP = "Every icon watches one or more spells on a unit and is shown while one of them is active. "
-	.. "The first ID also gives the placeholder icon. Auras are matched by ID and by name, so one ID covers all ranks.\n\n"
+	.. "Auras are matched by ID and by name, so one ID covers all ranks.\n\n"
+	.. "The button next to a spell sets whose auras count: only yours (and your pet's) or anyone's. "
 	.. "Several icons can share a slot: the one higher in the list wins."
 L.GROUPS_HELP = "Unlock the groups (button at the top or /sf unlock) and drag them with the left mouse button. "
 	.. "Right-click a group for a quick menu. A pinned group cannot be dragged by accident.\n\n"
@@ -83,13 +84,18 @@ local R = {
 	["Lock groups"] = "Закрепить группы",
 	["Lock"] = "Закрепить",
 	["Me"] = "На мне",
+	["Mine"] = "Мои",
+	["Anyone"] = "Все",
+	["Whose auras count"] = "Чьи ауры считать",
+	["Mine: cast by you or your pet."] = "Мои: наложенные вами или питомцем.",
+	["Anyone: cast by anyone."] = "Все: наложенные кем угодно.",
+	["Click to switch."] = "Нажмите, чтобы переключить.",
 	["Movers unlocked: drag groups with the left mouse button, right-click for options."] = "Группы разблокированы: перетаскивайте левой кнопкой мыши, правый клик — меню.",
 	["Name"] = "Название",
 	["New group"] = "Новая группа",
 	["New row goes"] = "Новый ряд",
 	["Not available in the Cooldown Manager, shown out of combat only:"] = "Нет в Cooldown Manager, видны только вне боя:",
 	["Only group positions and look will be replaced, your icons stay."] = "Будут заменены только положение и вид групп, ваши иконки останутся.",
-	["Only mine (cast by me or my pet)"] = "Только мои (от меня или питомца)",
 	["Opacity, %"] = "Непрозрачность, %",
 	["Open Cooldown Manager (/cdm)"] = "Открыть Cooldown Manager (/cdm)",
 	["Open settings"] = "Открыть настройки",
@@ -143,7 +149,8 @@ local R = {
 	["share settings"] = "поделиться настройками",
 
 	ICONS_HELP = "Каждая иконка следит за одним или несколькими заклинаниями на выбранной цели и видна, пока одно из них активно. "
-		.. "Первый ID задаёт иконку-заглушку. Ауры ищутся по ID и по названию, поэтому один ID покрывает все ранги.\n\n"
+		.. "Ауры ищутся по ID и по названию, поэтому один ID покрывает все ранги.\n\n"
+		.. "Кнопка рядом с заклинанием выбирает, чьи ауры считать: только ваши (и питомца) или любые. "
 		.. "Несколько иконок могут занимать один слот: показывается та, что выше в списке.",
 	GROUPS_HELP = "Разблокируйте группы (кнопка сверху или /sf unlock) и перетаскивайте их левой кнопкой мыши. "
 		.. "Правый клик по группе открывает меню. Закреплённую группу нельзя сдвинуть случайно.\n\n"

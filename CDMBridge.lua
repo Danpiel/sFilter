@@ -370,7 +370,7 @@ function CDM:ImportTrackedBuffs(profile)
 				track = "aura",
 				unit = selfAura and "player" or "target",
 				filter = selfAura and "HELPFUL" or "HARMFUL",
-				mine = true,
+				anySource = {},
 				group = group.key,
 				slot = ns.Profile.NextFreeSlot(profile, group.key),
 				disabled = false,

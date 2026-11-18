@@ -116,6 +116,28 @@ local function SanitizeIcon(icon, groupKeys, firstGroupKey)
 		return nil
 	end
 
+	-- Spells whose auras count from any caster; the others count only when cast by you or your
+	-- pet. Profiles from before the per-spell switch had one "mine" flag for the whole icon.
+	local any = {}
+	if type(icon.anySource) == "table" then
+		for _, spellID in pairs(icon.anySource) do
+			spellID = tonumber(spellID)
+			if spellID then
+				any[spellID] = true
+			end
+		end
+	elseif icon.mine == false then
+		for _, spellID in ipairs(spells) do
+			any[spellID] = true
+		end
+	end
+	local anySource = {}
+	for _, spellID in ipairs(spells) do
+		if any[spellID] then
+			anySource[#anySource + 1] = spellID
+		end
+	end
+
 	return {
 		spells = spells,
 		-- "aura": shown while one of the spells is an aura on the unit;
@@ -123,7 +145,7 @@ local function SanitizeIcon(icon, groupKeys, firstGroupKey)
 		track = OneOf(icon.track, ns.TRACKS, "aura"),
 		unit = OneOf(icon.unit, ns.UNITS, "player"),
 		filter = OneOf(icon.filter, ns.FILTERS, "HELPFUL"),
-		mine = icon.mine ~= false,
+		anySource = anySource,
 		group = groupKeys[icon.group] and icon.group or firstGroupKey,
 		slot = Integer(icon.slot, 1, LIMITS.slots, 1),
 		disabled = icon.disabled == true,
@@ -246,10 +268,10 @@ end
 -- Passive auras (talent and rune effects the player cannot react to) that earlier presets
 -- contained. Revision 2 strips them from saved profiles; an icon left without spells goes away,
 -- so a shared icon such as "Ignite, Living Bomb" keeps its active part.
-local PROFILE_REVISION = 4
+local PROFILE_REVISION = 5
 
 local CONSECRATION_DEBUFF = {
-	group = "debuff", track = "aura", unit = "target", filter = "HARMFUL", mine = true,
+	group = "debuff", track = "aura", unit = "target", filter = "HARMFUL", anySource = {},
 	spells = { 1280345, 1280346, 1280347, 1280348, 1280349, 1280353 },
 }
 
@@ -266,11 +288,46 @@ local function ConvertConsecration(profile)
 			icon.track = CONSECRATION_DEBUFF.track
 			icon.unit = CONSECRATION_DEBUFF.unit
 			icon.filter = CONSECRATION_DEBUFF.filter
-			icon.mine = true
+			icon.anySource = {}
 			icon.spells = ns.CopyTable(CONSECRATION_DEBUFF.spells)
 		end
 	end
 end
+
+-- Revision 5: whose auras count became a per-spell switch, and the presets now default to
+-- "yours" for damage spells and "anyone's" for other debuffs. Every spell of a saved icon that the
+-- class preset knows takes the preset's setting; spells you added yourself keep theirs.
+local function ApplyPresetSources(profile, gameKey, class)
+	local preset = ns.Defaults.presets[gameKey] and ns.Defaults.presets[gameKey][class]
+	local presetAny = {}
+	for _, icon in ipairs(preset or {}) do
+		local any = {}
+		for _, spellID in ipairs(icon.anySource) do
+			any[spellID] = true
+		end
+		for _, spellID in ipairs(icon.spells) do
+			presetAny[spellID] = any[spellID] or false
+		end
+	end
+	for _, icon in ipairs(profile.icons) do
+		local any = {}
+		for _, spellID in ipairs(icon.anySource or {}) do
+			any[spellID] = true
+		end
+		local anySource = {}
+		for _, spellID in ipairs(icon.spells) do
+			local fromPreset = presetAny[spellID]
+			if fromPreset == nil then
+				fromPreset = any[spellID] or false
+			end
+			if fromPreset then
+				anySource[#anySource + 1] = spellID
+			end
+		end
+		icon.anySource = anySource
+	end
+end
+
 local REMOVED_PASSIVE_IDS = {
 	6150, 12579, 12654, 12966, 14143, 15258, 15271, 16177, 16246, 16257, 16886, 17794, 19615,
 	20050, 20128, 32390, 51714, 53365, 194879, 196741, 262115, 316220, 325092, 384267, 390978,
@@ -315,6 +372,9 @@ function Profile.Migrate(profile, revision, gameKey, class)
 				table.remove(profile.icons, index)
 			end
 		end
+	end
+	if revision < 5 then
+		ApplyPresetSources(profile, gameKey, class)
 	end
 	return PROFILE_REVISION
 end

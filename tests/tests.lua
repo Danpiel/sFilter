@@ -205,6 +205,27 @@ if SCENARIO == "legacy" then
 	check(not RT[immolate].slot:IsShown(), "immolate slot hidden")
 	check(RT[trance].state.active and RT[trance].slot.count:GetText() == 3, "proc stack count")
 
+	-- Whose auras count is set per spell ----------------------------------------
+	check(#immolate.anySource == 0 and #curses.anySource == #curses.spells, "presets: damage spell yours, curse anyone's")
+	immolate.anySource = { 348 }
+	ns:RefreshAll()
+	check(RT[immolate].state.active, "immolate from another player shown once switched to anyone's")
+	immolate.anySource = {}
+	ns:RefreshAll()
+	check(not RT[immolate].state.active, "and hidden again when switched back to yours")
+	local curseSources = curses.anySource
+	curses.anySource = {}
+	ns:RefreshAll()
+	check(not RT[curses].state.active, "curse from another player hidden when switched to yours")
+	curses.anySource = curseSources
+	-- Ranks follow their spell by name: switching one Corruption ID covers every rank.
+	corruption.anySource = { 25311 }
+	ns:RefreshAll()
+	check(RT[corruption].anyIds[172] and RT[corruption].anyIds[6222] and not RT[corruption].anyIds[6223], "ranks share the source through the spell name")
+	corruption.anySource = {}
+	ns:RefreshAll()
+	check(RT[corruption].state.active and RT[curses].state.active, "sources restored")
+
 	-- Restricted (secret) mode ------------------------------------------------
 	M.secret = true
 	tick()
@@ -310,13 +331,14 @@ if SCENARIO == "forever" or SCENARIO == "elvui" then
 	check(RT[corruption].source == "native" and RT[trance].source == "native", "eligible icons use the aura container")
 	check(ns.Tracker:CombatStatus(corruption) == "native", "status native")
 	check(RT[agony].source == "native" and viewer.__items[1].__points[1] == nil, "CDM leaves icons the container shows")
-	local button = N.assigned[corruption]
+	check(#N.assigned[corruption] == 1, "one container slot for an icon with one source")
+	local button = N.assigned[corruption][1]
 	check(button and button.__iconRegion and button.__cooldownRegion and button.__countRegion and button.__timeRegion, "sFilter parts bound to the Blizzard button")
 	check(button and button.__points[1] and button.__points[1][2] == RT[corruption].slot and button.__width == 32, "button placed over the sFilter slot")
 	local slot = slotOf(button)
 	check(slot and slot.filter == "HARMFUL" and slot.filters.isFromPlayerOrPlayerPet == true, "slot filter and mine flag")
 	check(slot and slot.filters.includeSpellIDs[172] and slot.filters.includeSpellIDs[25311], "spell list has the icon IDs and the known rank")
-	check(slotOf(N.assigned[curses]).filters.isFromPlayerOrPlayerPet == nil, "any-source icon has no mine flag")
+	check(slotOf(N.assigned[curses][1]).filters.isFromPlayerOrPlayerPet == nil, "any-source icon has no mine flag")
 
 	M.auras.target = {
 		{ spellId = 999001, name = "Corruption", icon = 136118, applications = 0, duration = 18, expirationTime = 100, isHelpful = false, sourceUnit = "player", isFromPlayerOrPlayerPet = true },
@@ -331,16 +353,31 @@ if SCENARIO == "forever" or SCENARIO == "elvui" then
 	tick()
 	tick()
 	check(ns.db.learned and ns.db.learned.Corruption and ns.db.learned.Corruption[999001], "other rank seen out of combat is learned")
-	button = N.assigned[corruption]
+	button = N.assigned[corruption][1]
 	slot = slotOf(button)
 	check(slot and slot.filters.includeSpellIDs[999001], "learned rank added to the container")
 	containerFor("target"):UpdateAllAuras()
 	containerFor("player"):UpdateAllAuras()
 	check(button.__shown, "corruption shown by the container")
-	check(not N.assigned[immolate].__shown, "immolate from another player not shown (mine only)")
-	check(N.assigned[curses].__shown, "curse from another player shown (any source)")
-	check(N.assigned[trance].__shown, "proc on the player shown")
+	check(not N.assigned[immolate][1].__shown, "immolate from another player not shown (mine only)")
+	check(N.assigned[curses][1].__shown, "curse from another player shown (any source)")
+	check(N.assigned[trance][1].__shown, "proc on the player shown")
 	check(not RT[corruption].state.active and not RT[corruption].slot:IsShown(), "own icon stays hidden under the Blizzard button")
+
+	-- An icon whose spells mix "yours" and "anyone's" gets two slots over the same place.
+	immolate.anySource = { 348 }
+	ns:RefreshAll()
+	local mixed = N.assigned[immolate]
+	check(mixed and #mixed == 2, "mixed-source icon gets two container slots")
+	local mineSlot, anySlot = slotOf(mixed[1]), slotOf(mixed[2])
+	check(mineSlot.filters.isFromPlayerOrPlayerPet == true and mineSlot.filters.includeSpellIDs[707] and not mineSlot.filters.includeSpellIDs[348], "first slot: spells that count only when yours")
+	check(anySlot.filters.isFromPlayerOrPlayerPet == nil and anySlot.filters.includeSpellIDs[348] and not anySlot.filters.includeSpellIDs[707], "second slot: spells that count from anyone")
+	check(mixed[2].__points[1] and mixed[2].__points[1][2] == RT[immolate].slot and mixed[1].__points[1][2] == RT[immolate].slot, "both slots placed over the icon")
+	containerFor("target"):UpdateAllAuras()
+	check(mixed[2].__shown and not mixed[1].__shown, "immolate from another player shown through the anyone's slot")
+	immolate.anySource = {}
+	ns:RefreshAll()
+	check(#N.assigned[immolate] == 1 and N.assigned[corruption][1] == button, "back to one slot, other icons keep theirs")
 
 	-- Combat: auras secret, buttons restricted
 	M.secret, M.inCombat = true, true
@@ -358,7 +395,7 @@ if SCENARIO == "forever" or SCENARIO == "elvui" then
 	check(M.containerUpdates > updates, "target change refreshes the container")
 	M.secret, M.inCombat = false, false
 	M.FireEvent("PLAYER_REGEN_ENABLED")
-	check(not N.pending and N.assigned[corruption].__width == 40, "deferred changes applied after combat")
+	check(not N.pending and N.assigned[corruption][1].__width == 40, "deferred changes applied after combat")
 	group.size = 32
 	ns:RefreshLayout()
 
@@ -370,7 +407,7 @@ if SCENARIO == "forever" or SCENARIO == "elvui" then
 		if s.enabled then enabled = enabled + 1 end
 	end
 	for _, icon in ipairs(ns.profile.icons) do
-		if RT[icon].source == "native" and icon.unit == "target" then nativeTarget = nativeTarget + 1 end
+		if RT[icon].source == "native" and icon.unit == "target" then nativeTarget = nativeTarget + #N.assigned[icon] end
 	end
 	check(enabled == nativeTarget and RT[corruption].source ~= "native", "unused container slots are switched off")
 	corruption.disabled = false
@@ -398,13 +435,13 @@ do
 		{ spells = { 20050 } },                -- Vengeance
 		{ spells = { 172, 6222 } },            -- Corruption
 	} }
-	check(ns.Profile.Migrate(old, nil) == 4, "migration returns the new revision")
+	check(ns.Profile.Migrate(old, nil) == 5, "migration returns the new revision")
 	check(#old.icons == 2 and #old.icons[1].spells == 1 and old.icons[1].spells[1] == 400613, "passive part removed, active part kept")
 	check(old.icons[2].spells[1] == 172, "unrelated icons untouched")
 	local again = { icons = { { spells = { 20050 } } } }
 	ns.Profile.Migrate(again, 2)
 	check(#again.icons == 1, "migration runs only for older revisions")
-	check(sFilterDB.revisions[ns:ProfileKey()] == 4, "revision stored for the profile")
+	check(sFilterDB.revisions[ns:ProfileKey()] == 5, "revision stored for the profile")
 	local presetIDs = {}
 	for _, classes in pairs(ns.Defaults.presets) do
 		for _, icons in pairs(classes) do
@@ -415,6 +452,40 @@ do
 	end
 	check(not presetIDs[20050] and not presetIDs[12966] and not presetIDs[15271] and not presetIDs[6150], "passive procs are gone from the presets")
 	check(presetIDs[413399] and presetIDs[53489] and presetIDs[48108] and presetIDs[440895], "reactive procs stay in the presets")
+end
+
+-- Whose auras count: old profiles, revision 5 and export ------------------------
+do
+	local old = ns.Profile.Sanitize({ groups = ns.Defaults.Groups(), icons = {
+		{ spells = { 5782, 6213 }, unit = "target", filter = "HARMFUL", group = "debuff", slot = 6 },             -- Fear, "only mine"
+		{ spells = { 172, 6222 }, unit = "target", filter = "HARMFUL", mine = false, group = "debuff", slot = 1 }, -- Corruption, "anyone"
+		{ spells = { 999777 }, unit = "target", filter = "HARMFUL", mine = false, group = "debuff", slot = 7 },     -- own spell, "anyone"
+		{ spells = { 999778 }, unit = "target", filter = "HARMFUL", group = "debuff", slot = 8 },                 -- own spell, "only mine"
+	} })
+	check(#old.icons[1].anySource == 0 and deepEqual(old.icons[2].anySource, { 172, 6222 }) and old.icons[2].mine == nil, "old per-icon flag becomes per-spell sources")
+	ns.Profile.Migrate(old, 4, "forever", "WARLOCK")
+	check(deepEqual(old.icons[1].anySource, { 5782, 6213 }), "crowd control counts from anyone after the update")
+	check(#old.icons[2].anySource == 0, "damage over time counts only when yours after the update")
+	check(deepEqual(old.icons[3].anySource, { 999777 }) and #old.icons[4].anySource == 0, "spells added by hand keep their source")
+	local current = { icons = { { spells = { 5782 }, anySource = {} } } }
+	ns.Profile.Migrate(current, 5, "forever", "WARLOCK")
+	check(#current.icons[1].anySource == 0, "a switched spell is not reset again later")
+
+	local rogue = ns.Profile.Sanitize({ groups = ns.Defaults.Groups(), icons = ns.Defaults.Icons("forever", "ROGUE") })
+	local poisons
+	for _, icon in ipairs(rogue.icons) do
+		if tContains(icon.spells, 2818) then poisons = icon end
+	end
+	check(poisons and tContains(poisons.anySource, 13218) and tContains(poisons.anySource, 439473) and not tContains(poisons.anySource, 2818), "preset icon mixes yours (Deadly Poison) and anyone's (Wound Poison)")
+	check(poisons and poisons.spells[1] == 2818 and #poisons.spells == 16, "ANY{} keeps the spell order")
+
+	local ok, data = ns.Profile.ParseImport(ns.Profile.Export(ns.profile, "all"))
+	local imported = ok and ns.Profile.ApplyImport(ns.profile, data, "all")
+	local same = imported and #imported.icons == #ns.profile.icons
+	for i, icon in ipairs(same and ns.profile.icons or {}) do
+		same = same and deepEqual(imported.icons[i].anySource, icon.anySource)
+	end
+	check(same, "per-spell sources survive export and import")
 end
 
 -- Consecration added to existing Forever paladin profiles ----------------------
@@ -445,7 +516,7 @@ end
 if SCENARIO == "forever" or SCENARIO == "elvui" then
 	M.known = { [20116] = true }
 	M.cooldowns = {}
-	local consecration = { spells = { 26573, 20116, 20922 }, track = "cooldown", unit = "player", filter = "HELPFUL", mine = true, group = "debuff", slot = 6, disabled = false }
+	local consecration = { spells = { 26573, 20116, 20922 }, track = "cooldown", unit = "player", filter = "HELPFUL", anySource = {}, group = "debuff", slot = 6, disabled = false }
 	table.insert(ns.profile.icons, consecration)
 	ns:RefreshAll()
 	local crt = RT[consecration]
@@ -591,9 +662,18 @@ check(deepEqual(O.selectedIcon.spells, { 348, 6222 }), "spell list edit parses n
 editor.slot:SetText("7")
 editor.slot.__scripts.OnEditFocusLost(editor.slot)
 check(O.selectedIcon.slot == 7, "slot edit")
-editor.mine:SetChecked(false)
-editor.mine.__scripts.OnClick(editor.mine)
-check(O.selectedIcon.mine == false, "mine checkbox")
+-- One row per spell with a button that switches whose auras count.
+local spellRows = editor.spellList.__rows
+check(#spellRows == 2 and spellRows[1].source.__text == ns.L["Mine"] and spellRows[2].source.__text == ns.L["Mine"], "spell rows with their source")
+spellRows[1].source.__scripts.OnEnter(spellRows[1].source)
+check(GameTooltip:IsShown(), "source button explains itself")
+spellRows[1].source.__scripts.OnLeave(spellRows[1].source)
+spellRows[1].source.__scripts.OnClick(spellRows[1].source)
+check(deepEqual(O.selectedIcon.anySource, { 348 }), "source button switches one spell to anyone's")
+check(editor.spellList.__rows[1].source.__text == ns.L["Anyone"] and editor.spellList.__rows[2].source.__text == ns.L["Mine"], "rows show the new source")
+check(RT[O.selectedIcon].anyIds[348] and not RT[O.selectedIcon].anyIds[6222], "tracker follows the switch")
+editor.spellList.__rows[1].source.__scripts.OnClick(editor.spellList.__rows[1].source)
+check(#O.selectedIcon.anySource == 0, "and back to yours")
 local count = #ns.profile.icons
 local page = O.pages.icons
 local addBox
@@ -666,7 +746,7 @@ if SCENARIO == "elvui" then
 	check(ns.Skin.elvui and slot.elvui and not slot.border:IsShown() and not slot.gloss:IsShown(), "ElvUI icon template")
 	check(slot.count.__elvFont and slot.slotText.__elvFont, "icon texts use the ElvUI font")
 	check(D.activeGroups.def.mover.label.__elvFont, "mover label uses the ElvUI font")
-	check(O.iconEditor.title.__elvFont and O.iconEditor.mine.Text.__elvFont, "settings texts use the ElvUI font")
+	check(O.iconEditor.title.__elvFont and O.iconEditor.disabled.Text.__elvFont, "settings texts use the ElvUI font")
 	check(ns.Skin:GetFont() == "ElvFont", "fallback font is the ElvUI font")
 	check(elv.calls.RegisterCooldown == nil, "sFilter draws its own mm:ss timer instead of ElvUI cooldown text")
 	check((elv.calls.HandleButton or 0) > 5 and (elv.calls.HandleEditBox or 0) > 3 and (elv.calls.HandleDropDownBox or 0) > 2, "ElvUI skins widgets")

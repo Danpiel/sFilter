@@ -22,31 +22,62 @@ function Defaults.Groups()
 	}
 end
 
--- Shorthands: buff on me, debuff on my target, buff on my pet, debuff on me.
--- Pass true as the last argument to accept auras cast by anyone, not only by you or your pet.
-local function B(group, slot, spells, anySource)
-	return { group = group, slot = slot, unit = "player", filter = "HELPFUL", mine = not anySource, spells = spells }
+-- Whose auras count is set per spell and can be switched in the icon editor. By default a spell
+-- counts only when you or your pet cast it. ANY{ ... } marks spells whose auras count from anyone;
+-- it wraps the whole list or a part of it, e.g. { 2818, ANY{ 13218 } }.
+--
+-- Target debuffs follow one rule: damage over time, and effects that only help their own caster
+-- (Hemorrhage, Mind Spike, Vampiric Embrace, Haunt...), are yours; everything else (armor and
+-- curse debuffs, marks, judgements, slows, stuns and other crowd control) counts from anyone.
+local function ANY(spells)
+	return { any = spells }
 end
 
-local function D(group, slot, spells, anySource)
-	return { group = group, slot = slot, unit = "target", filter = "HARMFUL", mine = not anySource, spells = spells }
+local function Icon(group, slot, unit, filter, list, allAny)
+	local icon = { group = group, slot = slot, unit = unit, filter = filter, spells = {}, anySource = {} }
+	local function Add(items, any)
+		if items.any then
+			return Add(items.any, true)
+		end
+		for _, item in ipairs(items) do
+			if type(item) == "table" then
+				Add(item, any)
+			else
+				icon.spells[#icon.spells + 1] = item
+				if any then
+					icon.anySource[#icon.anySource + 1] = item
+				end
+			end
+		end
+	end
+	Add(list, allAny)
+	return icon
 end
 
-local function P(group, slot, spells, anySource)
-	return { group = group, slot = slot, unit = "pet", filter = "HELPFUL", mine = not anySource, spells = spells }
+-- Shorthands: buff on me, debuff on my target, buff on my pet, debuff on me (from anyone).
+local function B(group, slot, spells)
+	return Icon(group, slot, "player", "HELPFUL", spells)
+end
+
+local function D(group, slot, spells)
+	return Icon(group, slot, "target", "HARMFUL", spells)
+end
+
+local function P(group, slot, spells)
+	return Icon(group, slot, "pet", "HELPFUL", spells)
 end
 
 local function PD(group, slot, spells)
-	return { group = group, slot = slot, unit = "player", filter = "HARMFUL", mine = false, spells = spells }
+	return Icon(group, slot, "player", "HARMFUL", spells, true)
 end
 
 -- Shown while the spell's cooldown runs: for effects without any aura whose cooldown equals
 -- their duration.
 local function CD(group, slot, spells)
-	return { group = group, slot = slot, track = "cooldown", unit = "player", filter = "HELPFUL", mine = true, spells = spells }
+	local icon = Icon(group, slot, "player", "HELPFUL", spells)
+	icon.track = "cooldown"
+	return icon
 end
-
-local ANY = true
 
 ------------------------------------------------------------------------
 -- World of Warcraft: Forever (Classic spell IDs)
@@ -62,7 +93,7 @@ forever.WARRIOR = {
 	B("def", 3, { 2565 }),                                      -- Shield Block
 	B("def", 4, { 20230 }),                                     -- Retaliation
 	B("def", 5, { 402913 }),                                    -- Enraged Regeneration
-	B("def", 6, { 426490 }, ANY),                               -- Rallying Cry
+	B("def", 6, ANY{ 426490 }),                                 -- Rallying Cry
 	B("buff", 1, { 12292, 12723, 1230702, 1230704, 1230712 }),  -- Sweeping Strikes
 	B("buff", 2, { 12328 }),                                    -- Death Wish
 	B("buff", 3, { 1719, 13847 }),                              -- Recklessness
@@ -70,11 +101,11 @@ forever.WARRIOR = {
 	B("buff", 5, { 29131 }),                                    -- Bloodrage
 	B("buff", 5, { 18499 }),                                    -- Berserker Rage
 	D("debuff", 1, { 772, 6546, 6547, 6548, 11572, 11573, 11574 }), -- Rend
-	D("debuff", 2, { 7386, 7405, 8380, 11596, 11597 }, ANY),    -- Sunder Armor
-	D("debuff", 3, { 12294, 21551, 21552, 21553, 27580 }, ANY), -- Mortal Strike
-	D("debuff", 4, { 6343, 8198, 8204, 8205, 11580, 11581, 413589, 461810, 461826, 461827, 461828, 461829, 461830 }, ANY), -- Thunder Clap
-	D("debuff", 4, { 1715, 7372, 7373, 27584, 1236177, 12323, 23600 }, ANY), -- Hamstring, Piercing Howl
-	D("debuff", 5, { 1160, 6190, 11554, 11555, 11556, 13730, 16244, 19778, 27579 }, ANY), -- Demoralizing Shout
+	D("debuff", 2, ANY{ 7386, 7405, 8380, 11596, 11597 }),      -- Sunder Armor
+	D("debuff", 3, ANY{ 12294, 21551, 21552, 21553, 27580 }),   -- Mortal Strike
+	D("debuff", 4, ANY{ 6343, 8198, 8204, 8205, 11580, 11581, 413589, 461810, 461826, 461827, 461828, 461829, 461830 }), -- Thunder Clap
+	D("debuff", 4, ANY{ 1715, 7372, 7373, 27584, 1236177, 12323, 23600 }), -- Hamstring, Piercing Howl
+	D("debuff", 5, ANY{ 1160, 6190, 11554, 11555, 11556, 13730, 16244, 19778, 27579 }), -- Demoralizing Shout
 	B("proc", 1, { 12880, 427066, 462885 }),                    -- Enrage
 	B("proc", 2, { 413399 }),                                   -- Blood Surge
 	B("proc", 3, { 440114 }),                                   -- Sudden Death
@@ -92,9 +123,9 @@ forever.ROGUE = {
 	D("debuff", 1, { 1943, 8639, 8640, 11273, 11274, 11275, 14874, 14903, 15583, 1271514 }), -- Rupture
 	D("debuff", 2, { 703, 8631, 8632, 8633, 8818, 11289, 11290, 462724, 462726, 462727, 462728, 462729, 462730, 1213442, 412096 }), -- Garrote, Crimson Tempest
 	D("debuff", 3, { 424785, 16511 }),                          -- Saber Slash, Hemorrhage
-	D("debuff", 4, { 8647, 8649, 8650, 11197, 11198, 439471 }, ANY), -- Expose Armor, Sebacious Poison
-	D("debuff", 5, { 2818, 434312, 2819, 434313, 11353, 434314, 11354, 434315, 25349, 434316, 13218, 13222, 13223, 13224, 439472, 439473 }), -- Deadly Poison, Deadly Poison II, Deadly Poison III, Deadly Poison IV, Deadly Poison V, Wound Poison, Wound Poison II, Wound Poison III, Wound Poison IV, Numbing Poison, Atrophic Poison
-	D("debuff", 6, { 408, 8643, 27615, 1833, 6409, 14902, 1776, 1777, 8629, 11285, 11286, 400009 }), -- Kidney Shot, Cheap Shot, Gouge, Between the Eyes
+	D("debuff", 4, ANY{ 8647, 8649, 8650, 11197, 11198, 439471 }), -- Expose Armor, Sebacious Poison
+	D("debuff", 5, { 2818, 434312, 2819, 434313, 11353, 434314, 11354, 434315, 25349, 434316, ANY{ 13218, 13222, 13223, 13224, 439472, 439473 } }), -- Deadly Poison, Deadly Poison II, Deadly Poison III, Deadly Poison IV, Deadly Poison V; anyone's: Wound Poison, Wound Poison II, Wound Poison III, Wound Poison IV, Numbing Poison, Atrophic Poison
+	D("debuff", 6, ANY{ 408, 8643, 27615, 1833, 6409, 14902, 1776, 1777, 8629, 11285, 11286, 400009 }), -- Kidney Shot, Cheap Shot, Gouge, Between the Eyes
 	B("proc", 1, { 14177 }),                                    -- Cold Blood
 	B("proc", 2, { 462707, 1241810 }),                          -- Cutthroat
 	B("proc", 3, { 424919, 462752 }),                           -- Main Gauche
@@ -111,11 +142,11 @@ forever.MAGE = {
 	B("buff", 4, { 400573, 400586, 1300176, 1300177 }),         -- Arcane Blast
 	B("buff", 5, { 12051, 456397 }),                            -- Evocation
 	B("buff", 6, { 428878 }),                                   -- Balefire Bolt
-	D("debuff", 1, { 22959 }, ANY),                             -- Fire Vulnerability
+	D("debuff", 1, ANY{ 22959 }),                               -- Fire Vulnerability
 	D("debuff", 2, { 400613 }),                                 -- Living Bomb
 	D("debuff", 3, { 11366, 12505, 12522, 12523, 12524, 12525, 12526, 17273, 17274, 18809, 20228, 434443, 460858, 460860, 1236173, 1236291, 401502, 1237312, 1237313 }), -- Pyroblast, Frostfire Bolt
-	D("debuff", 4, { 122, 865, 6131, 9915, 10230, 12494, 428739 }), -- Frost Nova, Frostbite, Deep Freeze
-	D("debuff", 5, { 118, 12824, 12825, 12826, 28271, 28272, 29124 }), -- Polymorph
+	D("debuff", 4, ANY{ 122, 865, 6131, 9915, 10230, 12494, 428739 }), -- Frost Nova, Frostbite, Deep Freeze
+	D("debuff", 5, ANY{ 118, 12824, 12825, 12826, 28271, 28272, 29124 }), -- Polymorph
 	B("proc", 1, { 48108, 400669, 400670, 12536 }),             -- Hot Streak, Fingers of Frost, Clearcasting
 	B("proc", 2, { 400589, 400730 }),                           -- Brain Freeze, Missile Barrage
 	B("proc", 3, { 12043 }),                                    -- Presence of Mind
@@ -133,8 +164,8 @@ forever.WARLOCK = {
 	D("debuff", 2, { 980, 1014, 6217, 11711, 11712, 11713, 603 }), -- Bane of Agony, Bane of Doom
 	D("debuff", 3, { 348, 707, 1094, 2941, 11665, 11667, 11668, 25309, 426320, 426325, 1228049 }), -- Immolate, Shadowflame
 	D("debuff", 4, { 18265, 18879, 18880, 18881, 427717, 427719, 1242971, 1242972, 403501, 1293693, 1293694 }), -- Siphon Life, Unstable Affliction, Haunt
-	D("debuff", 5, { 440892, 1311676, 1311677, 1311680, 704, 7658, 7659, 11717, 1225841, 702, 1108, 6205, 7646, 11707, 11708, 1714, 11719 }, ANY), -- Curse of the Elements, Curse of Recklessness, Curse of Weakness, Curse of Tongues
-	D("debuff", 6, { 5782, 6213, 6215, 710, 18647, 457569, 465352 }), -- Fear, Banish
+	D("debuff", 5, ANY{ 440892, 1311676, 1311677, 1311680, 704, 7658, 7659, 11717, 1225841, 702, 1108, 6205, 7646, 11707, 11708, 1714, 11719 }), -- Curse of the Elements, Curse of Recklessness, Curse of Weakness, Curse of Tongues
+	D("debuff", 6, ANY{ 5782, 6213, 6215, 710, 18647, 457569, 465352 }), -- Fear, Banish
 	B("proc", 1, { 17941 }),                                    -- Shadow Trance
 	B("proc", 2, { 440873 }),                                   -- Decimation
 	P("proc", 3, { 755, 3698, 3699, 3700, 11693, 11694, 11695 }), -- Health Funnel
@@ -147,29 +178,29 @@ forever.HUNTER = {
 	P("def", 3, { 136, 3111, 3661, 3662, 13542, 13543, 13544 }), -- Mend Pet
 	B("buff", 1, { 3045 }),                                     -- Rapid Fire
 	P("buff", 2, { 19574 }),                                    -- Bestial Wrath
-	D("debuff", 1, { 1130, 14323, 14324, 14325, 1213268 }, ANY), -- Hunter's Mark
+	D("debuff", 1, ANY{ 1130, 14323, 14324, 14325, 1213268 }), -- Hunter's Mark
 	D("debuff", 2, { 1978, 13549, 13550, 13551, 13552, 13553, 13554, 13555, 25295, 425728, 425729, 425730, 425732, 425733, 425734, 425735, 425736, 425737, 1232979, 1232980, 1232981, 1232982 }), -- Serpent Sting
-	D("debuff", 3, { 3043, 3034, 14279, 14280 }),               -- Scorpid Sting, Viper Sting
+	D("debuff", 3, ANY{ 3043, 3034, 14279, 14280 }),            -- Scorpid Sting, Viper Sting
 	D("debuff", 4, { 458436, 458481, 458482, 24118, 24119, 24120, 414644, 1235826, 1235827, 1299332 }), -- Wyvern Strike, Lacerate
-	D("debuff", 5, { 2974, 14267, 14268, 27633, 1310180, 5116, 19503, 23601 }), -- Wing Clip, Concussive Shot, Scatter Shot
-	D("debuff", 6, { 3355, 14308, 14309, 13797, 14298, 14299, 14300, 14301, 13812, 14314, 14315 }), -- Freezing Trap Effect, Immolation Trap Effect, Explosive Trap Effect
+	D("debuff", 5, ANY{ 2974, 14267, 14268, 27633, 1310180, 5116, 19503, 23601 }), -- Wing Clip, Concussive Shot, Scatter Shot
+	D("debuff", 6, { ANY{ 3355, 14308, 14309 }, 13797, 14298, 14299, 14300, 14301, 13812, 14314, 14315 }), -- anyone's: Freezing Trap Effect; Immolation Trap Effect, Explosive Trap Effect
 	B("proc", 1, { 415414 }),                                   -- Lock and Load
 }
 
 forever.PRIEST = {
-	B("def", 1, { 17, 592, 600, 3747, 6065, 6066, 10898, 10899, 10900, 10901, 27607, 1236154 }, ANY), -- Power Word: Shield
+	B("def", 1, ANY{ 17, 592, 600, 3747, 6065, 6066, 10898, 10899, 10900, 10901, 27607, 1236154 }), -- Power Word: Shield
 	PD("def", 2, { 6788 }),                                     -- Weakened Soul
 	B("def", 3, { 586, 9578, 9579, 9592, 10941, 10942 }),       -- Fade
-	B("def", 4, { 425294, 402004 }, ANY),                       -- Dispersion, Pain Suppression
-	B("buff", 1, { 10060 }, ANY),                               -- Power Infusion
+	B("def", 4, ANY{ 425294, 402004 }),                         -- Dispersion, Pain Suppression
+	B("buff", 1, ANY{ 10060 }),                                 -- Power Infusion
 	B("buff", 2, { 14751 }),                                    -- Inner Focus
-	B("buff", 3, { 139, 6074, 6075, 6076, 6077, 6078, 10927, 10928, 10929, 25315, 27606, 425268, 425269, 425270, 425271, 425272, 425273, 425274, 425275, 425276, 425277, 1236151, 1289450 }, ANY), -- Renew
-	B("buff", 4, { 401877, 1240848, 1240849 }, ANY),            -- Prayer of Mending
+	B("buff", 3, ANY{ 139, 6074, 6075, 6076, 6077, 6078, 10927, 10928, 10929, 25315, 27606, 425268, 425269, 425270, 425271, 425272, 425273, 425274, 425275, 425276, 425277, 1236151, 1289450 }), -- Renew
+	B("buff", 4, ANY{ 401877, 1240848, 1240849 }),              -- Prayer of Mending
 	D("debuff", 1, { 589, 594, 970, 992, 2767, 10892, 10893, 10894, 27605 }), -- Shadow Word: Pain
 	D("debuff", 2, { 402668, 15286, 15290, 461966, 1237618 }),  -- Vampiric Touch, Vampiric Embrace
 	D("debuff", 3, { 2944, 19276, 19277, 19278, 19279, 19280, 425204 }), -- Devouring Plague, Void Plague
 	D("debuff", 4, { 431655, 14914, 15261, 15262, 15263, 15264, 15265, 15266, 15267, 17140, 17141, 17142, 18165, 23860 }), -- Mind Spike, Holy Fire
-	D("debuff", 5, { 8122, 8124, 10888, 10890, 15398, 27610, 9484, 9485, 10955 }), -- Psychic Scream, Shackle Undead
+	D("debuff", 5, ANY{ 8122, 8124, 10888, 10890, 15398, 27610, 9484, 9485, 10955 }), -- Psychic Scream, Shackle Undead
 	B("proc", 1, { 431666, 413247 }),                           -- Surge of Light, Serendipity
 }
 
@@ -181,15 +212,15 @@ forever.DRUID = {
 	B("buff", 1, { 5217 }),                                     -- Tiger's Fury
 	B("buff", 2, { 407988, 407989 }),                           -- Savage Roar
 	B("buff", 3, { 417141, 442211 }),                           -- Berserk
-	B("buff", 4, { 774, 1058, 1430, 2090, 2091, 3627, 8070, 8910, 9839, 9840, 9841, 25299, 417057, 417058, 417059, 417060, 417061, 417062, 417063, 417064, 417065, 417066, 417068, 408124 }, ANY), -- Rejuvenation, Lifebloom
-	B("buff", 5, { 8936, 8938, 8939, 8940, 8941, 9750, 9856, 9857, 9858, 436937, 436938, 436939, 436940, 436942, 436943, 436944, 436945, 436946, 408120, 1238214, 1238215 }, ANY), -- Regrowth, Wild Growth
-	B("buff", 6, { 29166, 456195 }, ANY),                       -- Innervate
+	B("buff", 4, ANY{ 774, 1058, 1430, 2090, 2091, 3627, 8070, 8910, 9839, 9840, 9841, 25299, 417057, 417058, 417059, 417060, 417061, 417062, 417063, 417064, 417065, 417066, 417068, 408124 }), -- Rejuvenation, Lifebloom
+	B("buff", 5, ANY{ 8936, 8938, 8939, 8940, 8941, 9750, 9856, 9857, 9858, 436937, 436938, 436939, 436940, 436942, 436943, 436944, 436945, 436946, 408120, 1238214, 1238215 }), -- Regrowth, Wild Growth
+	B("buff", 6, ANY{ 29166, 456195 }),                         -- Innervate
 	D("debuff", 1, { 8921, 8924, 8925, 8926, 8927, 8928, 8929, 9833, 9834, 9835, 20690, 21669, 429823 }), -- Moonfire
 	D("debuff", 2, { 414684, 414687, 414689, 5570, 24974, 24975, 24976, 24977 }), -- Sunfire, Insect Swarm
-	D("debuff", 3, { 770, 778, 9749, 9907, 13424, 13752 }, ANY), -- Faerie Fire
+	D("debuff", 3, ANY{ 770, 778, 9749, 9907, 13424, 13752 }), -- Faerie Fire
 	D("debuff", 4, { 1822, 1823, 1824, 9904, 24331, 24332, 27556, 27638, 9007, 9824, 9826, 24118, 24119, 24120, 414644, 1235826, 1235827, 1299332 }), -- Rake, Pounce Bleed, Lacerate
 	D("debuff", 5, { 1079, 9492, 9493, 9752, 9894, 9896 }),     -- Rip
-	D("debuff", 6, { 99, 1735, 9490, 9747, 9898, 339, 1062, 5195, 5196, 9852, 9853, 19970, 19971, 19972, 19973, 19974, 19975, 2637, 18657, 18658, 5211, 6798, 8983 }), -- Demoralizing Roar, Entangling Roots, Hibernate, Bash
+	D("debuff", 6, ANY{ 99, 1735, 9490, 9747, 9898, 339, 1062, 5195, 5196, 9852, 9853, 19970, 19971, 19972, 19973, 19974, 19975, 2637, 18657, 18658, 5211, 6798, 8983 }), -- Demoralizing Roar, Entangling Roots, Hibernate, Bash
 	B("proc", 1, { 16870 }),                                    -- Clearcasting
 	B("proc", 2, { 17116 }),                                    -- Nature's Swiftness
 	B("proc", 3, { 408255, 414800 }),                           -- Eclipse, Fury of Stormrage
@@ -197,24 +228,24 @@ forever.DRUID = {
 }
 
 forever.SHAMAN = {
-	B("def", 1, { 408521, 1239242, 1239243 }, ANY),             -- Riptide
-	B("buff", 1, { 16191, 17355, 17360 }, ANY),                 -- Mana Tide
+	B("def", 1, ANY{ 408521, 1239242, 1239243 }),               -- Riptide
+	B("buff", 1, ANY{ 16191, 17355, 17360 }),                   -- Mana Tide
 	B("proc", 2, { 415105, 440285, 468526 }),                   -- Power Surge
 	B("buff", 2, { 409324 }),                                   -- Ancestral Guidance
 	D("debuff", 1, { 8050, 8052, 8053, 10447, 10448, 29228 }),  -- Flame Shock
-	D("debuff", 2, { 8056, 8058, 10472, 10473, 3600 }),         -- Frost Shock, Earthbind
-	D("debuff", 3, { 17364 }, ANY),                             -- Stormstrike
+	D("debuff", 2, ANY{ 8056, 8058, 10472, 10473, 3600 }),      -- Frost Shock, Earthbind
+	D("debuff", 3, ANY{ 17364 }),                               -- Stormstrike
 	B("proc", 1, { 408505 }),                                   -- Maelstrom Weapon
 	B("proc", 3, { 16188, 432041 }),                            -- Nature's Swiftness, Tidal Waves
 }
 
 forever.PALADIN = {
 	B("def", 1, { 642, 1020, 498, 5573, 458312, 458371 }),      -- Divine Shield, Divine Protection
-	B("def", 2, { 1022, 5599, 10278, 442948 }, ANY),            -- Blessing of Protection
+	B("def", 2, ANY{ 1022, 5599, 10278, 442948 }),              -- Blessing of Protection
 	PD("def", 3, { 25771 }),                                    -- Forbearance
 	B("def", 4, { 20925, 20927, 20928 }),                       -- Holy Shield
 	B("def", 5, { 53601, 58597, 412018, 412019, 440651 }),      -- Sacred Shield
-	B("def", 6, { 1044 }, ANY),                                 -- Blessing of Freedom
+	B("def", 6, ANY{ 1044 }),                                   -- Blessing of Freedom
 	B("buff", 1, { 20154, 20287, 20288, 20289, 20290, 20291, 20292, 20293, 21084 }), -- Seal of Righteousness
 	B("buff", 1, { 20375, 20915, 20918, 20919, 20920 }),        -- Seal of Command
 	B("buff", 1, { 20162, 20305, 20306, 20307, 20308, 21082 }), -- Seal of the Crusader
@@ -223,10 +254,10 @@ forever.PALADIN = {
 	B("buff", 1, { 20166, 20356, 20357, 20165, 20347, 20348, 20349, 20164 }), -- Seal of Wisdom, Seal of Light, Seal of Justice
 	B("buff", 2, { 407788 }),                                   -- Avenging Wrath
 	B("buff", 3, { 20216 }),                                    -- Divine Favor
-	D("debuff", 1, { 20188, 20300, 20301, 20302, 20303, 21183, 456496 }, ANY), -- Judgement of the Crusader
-	D("debuff", 2, { 20185, 20344, 20345, 20346, 20186, 20354, 20355 }, ANY), -- Judgement of Light, Judgement of Wisdom
-	D("debuff", 3, { 20184 }),                                  -- Judgement of Justice
-	D("debuff", 4, { 853, 5588, 5589, 10308 }),                 -- Hammer of Justice
+	D("debuff", 1, ANY{ 20188, 20300, 20301, 20302, 20303, 21183, 456496 }), -- Judgement of the Crusader
+	D("debuff", 2, ANY{ 20185, 20344, 20345, 20346, 20186, 20354, 20355 }), -- Judgement of Light, Judgement of Wisdom
+	D("debuff", 3, ANY{ 20184 }),                               -- Judgement of Justice
+	D("debuff", 4, ANY{ 853, 5588, 5589, 10308 }),              -- Hammer of Justice
 	D("debuff", 5, { 1280345, 1280346, 1280347, 1280348, 1280349, 1280353 }), -- Consecration (debuff while the target stands in it)
 	B("proc", 1, { 53489 }),                                    -- The Art of War
 	B("proc", 2, { 53672, 437063 }),                            -- Infusion of Light
@@ -258,7 +289,7 @@ retail.DEMONHUNTER = {
 	B("def", 1, { 212800 }),             -- Blur
 	B("def", 2, { 203819 }),             -- Demon Spikes
 	B("def", 3, { 196555 }),             -- Netherwalk
-	B("def", 4, { 209426 }, ANY),        -- Darkness
+	B("def", 4, ANY{ 209426 }),          -- Darkness
 	B("buff", 1, { 162264, 187827 }),    -- Metamorphosis
 	B("buff", 2, { 208628 }),            -- Momentum
 	B("buff", 3, { 258920 }),            -- Immolation Aura
@@ -313,7 +344,7 @@ retail.HUNTER = {
 	B("buff", 4, { 288613 }),            -- Trueshot
 	B("buff", 5, { 257622 }),            -- Trick Shots
 	B("buff", 6, { 260286 }),            -- Tip of the Spear
-	D("debuff", 1, { 257284 }, ANY),     -- Hunter's Mark
+	D("debuff", 1, ANY{ 257284 }),       -- Hunter's Mark
 	D("debuff", 2, { 271788 }),          -- Serpent Sting
 	D("debuff", 3, { 217200 }),          -- Barbed Shot
 	D("debuff", 4, { 212431 }),          -- Explosive Shot
@@ -328,7 +359,7 @@ retail.MAGE = {
 	B("def", 4, { 55342 }),              -- Mirror Image
 	B("buff", 1, { 190319, 12472, 365362 }), -- Combustion, Icy Veins, Arcane Surge
 	B("buff", 2, { 48107 }),             -- Heating Up
-	D("debuff", 1, { 228358 }, ANY),     -- Winter's Chill
+	D("debuff", 1, ANY{ 228358 }),       -- Winter's Chill
 	D("debuff", 2, { 210824 }),          -- Touch of the Magi
 	D("debuff", 3, { 217694 }),          -- Living Bomb
 	B("proc", 1, { 48108, 44544, 263725 }), -- Hot Streak, Fingers of Frost, Clearcasting
@@ -350,7 +381,7 @@ retail.MONK = {
 }
 
 retail.PALADIN = {
-	B("def", 1, { 642, 1022 }, ANY),     -- Divine Shield, Blessing of Protection
+	B("def", 1, ANY{ 642, 1022 }),       -- Divine Shield, Blessing of Protection
 	B("def", 2, { 31850 }),              -- Ardent Defender
 	B("def", 3, { 86659, 212641 }),      -- Guardian of Ancient Kings
 	B("def", 4, { 498, 403876 }),        -- Divine Protection
@@ -368,11 +399,11 @@ retail.PALADIN = {
 
 retail.PRIEST = {
 	B("def", 1, { 47585 }),              -- Dispersion
-	B("def", 2, { 17 }, ANY),            -- Power Word: Shield
+	B("def", 2, ANY{ 17 }),              -- Power Word: Shield
 	B("def", 3, { 19236 }),              -- Desperate Prayer
 	B("def", 4, { 586 }),                -- Fade
 	B("buff", 1, { 194249 }),            -- Voidform
-	B("buff", 2, { 10060 }, ANY),        -- Power Infusion
+	B("buff", 2, ANY{ 10060 }),          -- Power Infusion
 	B("buff", 3, { 194384 }),            -- Atonement
 	B("buff", 4, { 391109 }),            -- Dark Ascension
 	D("debuff", 1, { 34914 }),           -- Vampiric Touch
@@ -397,7 +428,7 @@ retail.ROGUE = {
 	D("debuff", 2, { 703 }),             -- Garrote
 	D("debuff", 3, { 2818 }),            -- Deadly Poison
 	D("debuff", 4, { 121411 }),          -- Crimson Tempest
-	D("debuff", 5, { 408 }),             -- Kidney Shot
+	D("debuff", 5, ANY{ 408 }),          -- Kidney Shot
 	B("proc", 1, { 195627 }),            -- Opportunity
 	B("proc", 2, { 386270 }),            -- Audacity
 }
@@ -445,7 +476,7 @@ retail.WARRIOR = {
 	B("buff", 5, { 260708 }),            -- Sweeping Strikes
 	D("debuff", 1, { 388539 }),          -- Rend
 	D("debuff", 2, { 208086 }),          -- Colossus Smash
-	D("debuff", 3, { 6343 }, ANY),       -- Thunder Clap
+	D("debuff", 3, ANY{ 6343 }),         -- Thunder Clap
 	B("proc", 1, { 184362 }),            -- Enrage
 	B("proc", 2, { 52437, 280776 }),     -- Sudden Death
 }

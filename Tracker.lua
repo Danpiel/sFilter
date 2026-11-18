@@ -60,10 +60,19 @@ local function IsSpellAuraSecret(spellID)
 	return not ok or secret ~= false
 end
 
+-- Whose auras count is set per spell: icon.anySource lists the spells whose auras count from any
+-- caster, the others count only when cast by you or your pet. Ranks share the setting through the
+-- spell name, so a rank added later or seen on an aura follows the spell it belongs to.
 function Tracker:Resolve(icon)
 	local rt = self:GetRuntime(icon)
 	rt.ids, rt.names, rt.order, rt.invalid, rt.whitelist = {}, {}, {}, {}, {}
+	rt.anyIds, rt.anyNames = {}, {}
 	rt.texture, rt.pending, rt.label = nil, false, nil
+
+	local anySource = {}
+	for _, spellID in ipairs(icon.anySource or {}) do
+		anySource[spellID] = true
+	end
 
 	for _, spellID in ipairs(icon.spells) do
 		if not ns.DoesSpellExist(spellID) then
@@ -82,10 +91,20 @@ function Tracker:Resolve(icon)
 				rt.label = rt.label and (rt.label .. ", " .. name) or name
 			end
 			rt.order[#rt.order + 1] = { id = spellID, name = name }
+			if name and anySource[spellID] then
+				rt.anyNames[name] = true
+			end
 			rt.texture = rt.texture or texture
 			if not IsSpellAuraSecret(spellID) then
 				rt.whitelist[#rt.whitelist + 1] = spellID
 			end
+		end
+	end
+
+	for _, entry in ipairs(rt.order) do
+		entry.any = anySource[entry.id] or (entry.name ~= nil and rt.anyNames[entry.name]) or false
+		if entry.any then
+			rt.anyIds[entry.id] = true
 		end
 	end
 
@@ -318,9 +337,9 @@ local function SetActive(state, aura)
 end
 
 local function MatchLookup(icon, rt, lookup)
-	local byId = icon.mine and lookup.mineById or lookup.byId
-	local byName = icon.mine and lookup.mineByName or lookup.byName
 	for _, entry in ipairs(rt.order) do
+		local byId = entry.any and lookup.byId or lookup.mineById
+		local byName = entry.any and lookup.byName or lookup.mineByName
 		local aura = byId[entry.id] or (entry.name and byName[entry.name])
 		if aura then
 			-- Matched another rank by name: remember its ID for the in-combat aura container.
@@ -342,7 +361,7 @@ local function MatchWhitelisted(unit, icon, rt)
 			local typeKnown = aura.isHelpful ~= nil and not ns.IsSecret(aura.isHelpful)
 			local typeMatches = not typeKnown or (aura.isHelpful == wantsHelpful)
 			local sourceKnown = not ns.IsSecret(aura.sourceUnit) and not ns.IsSecret(aura.isFromPlayerOrPlayerPet)
-			local sourceMatches = not icon.mine or not sourceKnown or IsMine(aura)
+			local sourceMatches = rt.anyIds[spellID] or not sourceKnown or IsMine(aura)
 			if typeMatches and sourceMatches then
 				SetActive(rt.state, aura)
 				return

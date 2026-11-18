@@ -11,6 +11,9 @@
 -- Rules from the container: slot buttons can only be configured, moved and resized while aura
 -- data is not secret, so changes made in combat are applied when it ends. Slots cannot be
 -- removed, so they are reused by key and disabled when not needed.
+--
+-- A slot either accepts auras from anyone or only yours, so an icon whose spells mix both gets two
+-- slots over the same place: one for its spells that count only when yours, one for the rest.
 
 local _, ns = ...
 
@@ -88,6 +91,7 @@ end
 function Native:Init()
 	self.containers = {}
 	self.pools = {}
+	-- Icon -> its Blizzard aura buttons (two when its spells mix "yours" and "anyone's").
 	self.assigned = {}
 	self.pending = false
 
@@ -152,15 +156,19 @@ function Native:RefreshUnit(unit)
 	end
 end
 
--- Spell IDs for the container. It matches IDs only, so in Forever, where every rank of a spell
--- has its own ID, the rank you know and ranks seen on auras before are added as well.
-function Native:BuildSpellMap(icon, rt)
-	local map = {}
+-- Spell IDs for the container, split by whose auras count: maps.mine and maps.any. The container
+-- matches IDs only, so in Forever, where every rank of a spell has its own ID, the rank you know
+-- and ranks seen on auras before are added as well.
+local SOURCES = { "mine", "any" }
+
+function Native:BuildSpellMaps(icon, rt)
+	local maps = { mine = {}, any = {} }
 	for _, spellID in ipairs(icon.spells) do
-		map[spellID] = true
+		maps[rt.anyIds[spellID] and "any" or "mine"][spellID] = true
 	end
 	local learned = ns.db.learned or {}
 	for name in pairs(rt.names) do
+		local map = maps[rt.anyNames[name] and "any" or "mine"]
 		if C_Spell and C_Spell.GetSpellInfo then
 			local info = C_Spell.GetSpellInfo(name)
 			if info and info.spellID then
@@ -171,7 +179,7 @@ function Native:BuildSpellMap(icon, rt)
 			map[spellID] = true
 		end
 	end
-	return map
+	return maps
 end
 
 function Native:EnsureSlot(container, unit, key, filterString, candidateFilters)
@@ -221,20 +229,33 @@ function Native:Rebuild()
 		local slot = rt and rt.slot
 		if slot and not icon.disabled and #rt.order > 0 and self:IsEligible(icon) and not slot.groupFrame.group.hidden then
 			local unit = icon.unit
-			local index = (used[unit] or 0) + 1
-			local candidateFilters = { includeSpellIDs = self:BuildSpellMap(icon, rt) }
-			if icon.mine then
-				candidateFilters.isFromPlayerOrPlayerPet = true
+			local maps = self:BuildSpellMaps(icon, rt)
+			local buttons = {}
+			for _, source in ipairs(SOURCES) do
+				if next(maps[source]) then
+					local candidateFilters = { includeSpellIDs = maps[source] }
+					if source == "mine" then
+						candidateFilters.isFromPlayerOrPlayerPet = true
+					end
+					local key = "dsf" .. ((used[unit] or 0) + #buttons + 1)
+					local ok, button = pcall(function()
+						return self:EnsureSlot(self:GetContainer(unit), unit, key, icon.filter, candidateFilters)
+					end)
+					if not (ok and button) then
+						if not ok then
+							self.lastError = button
+						end
+						-- Slots made for this icon so far are reused by the next one or switched off.
+						buttons = nil
+						break
+					end
+					buttons[#buttons + 1] = button
+				end
 			end
-			local ok, button = pcall(function()
-				return self:EnsureSlot(self:GetContainer(unit), unit, "dsf" .. index, icon.filter, candidateFilters)
-			end)
-			if ok and button then
-				used[unit] = index
+			if buttons and #buttons > 0 then
+				used[unit] = (used[unit] or 0) + #buttons
 				rt.source = "native"
-				self.assigned[icon] = button
-			elseif not ok then
-				self.lastError = button
+				self.assigned[icon] = buttons
 			end
 		end
 	end
@@ -260,19 +281,21 @@ function Native:Reanchor()
 		self.pending = true
 		return
 	end
-	for icon, button in pairs(self.assigned) do
+	for icon, buttons in pairs(self.assigned) do
 		local slot = RT[icon] and RT[icon].slot
 		if slot then
 			local group = slot.groupFrame.group
-			pcall(function()
-				button:ClearAllPoints()
-				button:SetPoint("CENTER", slot, "CENTER")
-				button:SetSize(group.size, group.size)
-				button:SetAlpha(group.alpha)
-				if parts[button] then
-					ns.Skin:UpdateIconFonts(parts[button], group.size)
-				end
-			end)
+			for _, button in ipairs(buttons) do
+				pcall(function()
+					button:ClearAllPoints()
+					button:SetPoint("CENTER", slot, "CENTER")
+					button:SetSize(group.size, group.size)
+					button:SetAlpha(group.alpha)
+					if parts[button] then
+						ns.Skin:UpdateIconFonts(parts[button], group.size)
+					end
+				end)
+			end
 		end
 	end
 end

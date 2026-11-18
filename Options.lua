@@ -421,6 +421,72 @@ local function SelectedIconIndex()
 	end
 end
 
+-- Rows of the spell list in the icon editor: one per spell name (all of its ranks), with a button
+-- that switches whose auras count for it.
+local SPELL_ROW_HEIGHT = 20
+
+local function ShowSourceTooltip(button)
+	GameTooltip:SetOwner(button, "ANCHOR_RIGHT")
+	GameTooltip:SetText(L["Whose auras count"])
+	GameTooltip:AddLine(L["Mine: cast by you or your pet."], 1, 1, 1, true)
+	GameTooltip:AddLine(L["Anyone: cast by anyone."], 1, 1, 1, true)
+	GameTooltip:AddLine(L["Click to switch."], 0.7, 0.7, 0.7, true)
+	GameTooltip:Show()
+end
+
+local function HideTooltip()
+	GameTooltip:Hide()
+end
+
+-- Switches one spell (every listed ID of it) between "yours only" and "anyone's".
+function Options:ToggleSpellSource(item)
+	local icon = self.selectedIcon
+	if not icon or not item.ids then
+		return
+	end
+	local any = {}
+	for _, spellID in ipairs(icon.anySource or {}) do
+		any[spellID] = true
+	end
+	for _, spellID in ipairs(item.ids) do
+		any[spellID] = not item.any or nil
+	end
+	local anySource = {}
+	for _, spellID in ipairs(icon.spells) do
+		if any[spellID] then
+			anySource[#anySource + 1] = spellID
+		end
+	end
+	icon.anySource = anySource
+	ns:RefreshAll()
+end
+
+local function SetupSpellRow(row, item)
+	if not row.created then
+		row.created = true
+		row:SetHeight(SPELL_ROW_HEIGHT)
+		row.source = Button(row, "", 64, function(button)
+			Options:ToggleSpellSource(button.item)
+		end)
+		row.source:SetHeight(18)
+		row.source:SetPoint("RIGHT", -2, 0)
+		row.source:SetScript("OnEnter", ShowSourceTooltip)
+		row.source:SetScript("OnLeave", HideTooltip)
+		row.text = Text(row, "", 11, "GameFontNormalSmall")
+		row.text:SetPoint("LEFT", 4, 0)
+		row.text:SetPoint("RIGHT", row.source, "LEFT", -4, 0)
+		row.text:SetWordWrap(false)
+	end
+	row.item = item
+	row.source.item = item
+	row.text:SetText(item.text)
+	row.source:SetShown(item.ids ~= nil)
+	if item.ids then
+		row.source:SetText(item.any and L["Anyone"] or L["Mine"])
+		row.source:SetEnabled(not item.cooldown)
+	end
+end
+
 function Options:BuildIconsPage(page)
 	local addBox = LabeledEditBox(page, L["Spell ID, link or name"], 170)
 	addBox:SetPoint("TOPLEFT", 6, -16)
@@ -439,7 +505,7 @@ function Options:BuildIconsPage(page)
 			track = "aura",
 			unit = harmful and "target" or "player",
 			filter = harmful and "HARMFUL" or "HELPFUL",
-			mine = true,
+			anySource = {},
 			group = groupKey,
 			slot = Profile.NextFreeSlot(ns.profile, groupKey),
 			disabled = false,
@@ -556,9 +622,8 @@ function Options:BuildIconsPage(page)
 	end)
 	editor.spells:SetPoint("TOPLEFT", 8, -78)
 
-	editor.names = Text(editor, "", 11, "GameFontNormalSmall")
-	editor.names:SetPoint("TOPLEFT", editor.spells, "BOTTOMLEFT", -4, -4)
-	editor.names:SetWidth(300)
+	editor.spellList = List(editor, 284, 5 * SPELL_ROW_HEIGHT, SPELL_ROW_HEIGHT, SetupSpellRow)
+	editor.spellList:SetPoint("TOPLEFT", editor.spells, "BOTTOMLEFT", -4, -10)
 
 	editor.unit = LabeledDropdown(editor, L["Whose auras"], 140, ListEntries(ns.UNITS, UNIT_LABELS), function(value)
 		return Options.selectedIcon and Options.selectedIcon.unit == value
@@ -567,7 +632,7 @@ function Options:BuildIconsPage(page)
 			icon.unit = value
 		end)
 	end)
-	editor.unit:SetPoint("TOPLEFT", 4, -150)
+	editor.unit:SetPoint("TOPLEFT", 4, -238)
 
 	editor.filter = LabeledDropdown(editor, L["Aura type"], 140, ListEntries(ns.FILTERS, FILTER_LABELS), function(value)
 		return Options.selectedIcon and Options.selectedIcon.filter == value
@@ -588,7 +653,7 @@ function Options:BuildIconsPage(page)
 			end
 		end)
 	end)
-	editor.group:SetPoint("TOPLEFT", 4, -204)
+	editor.group:SetPoint("TOPLEFT", 4, -292)
 
 	editor.slot = LabeledEditBox(editor, L["Slot"], 60, function(text)
 		local slot = tonumber(text)
@@ -603,19 +668,12 @@ function Options:BuildIconsPage(page)
 	editor.slot:SetPoint("LEFT", editor.group, "RIGHT", 18, 0)
 	editor.slot:SetNumeric(true)
 
-	editor.mine = Check(editor, L["Only mine (cast by me or my pet)"], function(checked)
-		Edit(function(icon)
-			icon.mine = checked
-		end)
-	end)
-	editor.mine:SetPoint("TOPLEFT", 0, -240)
-
 	editor.disabled = Check(editor, L["Disabled"], function(checked)
 		Edit(function(icon)
 			icon.disabled = checked
 		end)
 	end)
-	editor.disabled:SetPoint("TOPLEFT", editor.mine, "BOTTOMLEFT", 0, -2)
+	editor.disabled:SetPoint("TOPLEFT", 0, -326)
 	editor.cooldown = Check(editor, L["Show while the spell is on cooldown (ground effects)"], function(checked)
 		Edit(function(icon)
 			icon.track = checked and "cooldown" or "aura"
@@ -661,23 +719,27 @@ function Options:RefreshIcons()
 		editor.spells:SetText(table.concat(icon.spells, ", "))
 	end
 
-	-- One line per spell name with all of its IDs (ranks), so long rank lists stay readable.
-	local lines, byName, names = {}, {}, {}
+	-- One row per spell name with all of its IDs (ranks), so long rank lists stay readable, and
+	-- whose auras count for it. Ranks share the setting (see Tracker:Resolve).
+	local items, byName = {}, {}
 	for _, entry in ipairs(rt.order) do
 		local name = entry.name or "..."
-		if not byName[name] then
-			byName[name] = {}
-			names[#names + 1] = name
+		local item = byName[name]
+		if not item then
+			item = { name = name, ids = {}, any = false, cooldown = icon.track == "cooldown" }
+			byName[name] = item
+			items[#items + 1] = item
 		end
-		table.insert(byName[name], entry.id)
+		table.insert(item.ids, entry.id)
+		item.any = item.any or entry.any
 	end
-	for _, name in ipairs(names) do
-		lines[#lines + 1] = name .. " " .. GREEN .. table.concat(byName[name], ", ") .. "|r"
+	for _, item in ipairs(items) do
+		item.text = item.name .. " " .. GREEN .. table.concat(item.ids, ", ") .. "|r"
 	end
 	for _, spellID in ipairs(rt.invalid) do
-		lines[#lines + 1] = RED .. spellID .. " " .. L["not found in this game version"] .. "|r"
+		items[#items + 1] = { text = RED .. spellID .. " " .. L["not found in this game version"] .. "|r" }
 	end
-	editor.names:SetText(table.concat(lines, "\n"))
+	editor.spellList:SetItems(items)
 
 	editor.unit:GenerateMenu()
 	editor.filter:GenerateMenu()
@@ -685,13 +747,11 @@ function Options:RefreshIcons()
 	if not editor.slot:HasFocus() then
 		editor.slot:SetText(icon.slot)
 	end
-	editor.mine:SetChecked(icon.mine)
 	editor.disabled:SetChecked(icon.disabled)
 	editor.cooldown:SetChecked(icon.track == "cooldown")
-	-- Unit, aura type and "only mine" do not apply to cooldown icons.
+	-- Unit, aura type and whose auras count do not apply to cooldown icons.
 	editor.unit:SetEnabled(icon.track ~= "cooldown")
 	editor.filter:SetEnabled(icon.track ~= "cooldown")
-	editor.mine:SetEnabled(icon.track ~= "cooldown")
 end
 
 ------------------------------------------------------------------------
