@@ -267,6 +267,7 @@ loader:SetScript("OnEvent", function(self, event, name)
 		ns.Native:Init()
 		ns.CDM:Init()
 		ns.Options:Init()
+		ns.Ellesmere:Init()
 		ns:RefreshAll()
 		self:UnregisterEvent("PLAYER_LOGIN")
 	end

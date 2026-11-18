@@ -8,6 +8,40 @@ M.locale = SCENARIO == "enUS" and "enUS" or "ruRU"
 M.auraContainer = SCENARIO ~= "legacy"
 M.Install(_G)
 
+if SCENARIO == "ellesmere" then
+	-- EllesmereUI's plugin API with a minimal panel: a tab's frame is built once and cached; showing
+	-- a cached tab calls onPageCacheRestore, as EllesmereUI does. The panel does not open in combat.
+	local eui = { plugins = {}, wrappers = {}, prebuild = false }
+	eui.panel = M.newWidget("Frame", nil, UIParent)
+	eui.panel:Hide()
+	function eui.RegisterPlugin(id, spec) eui.plugins[id] = spec return true end
+	function eui.GetAccentColor() return 0.2, 0.4, 0.6 end
+	function eui.GetFontPath() return "EUIFont" end
+	function eui.IsSearchPrebuild() return eui.prebuild end
+	function eui.OpenPlugin(id, moduleKey, pageName)
+		local spec = eui.plugins[id]
+		local module = spec and spec.modules[1]
+		if InCombatLockdown() or not module or module.key ~= moduleKey or not tContains(module.pages, pageName) then
+			return false
+		end
+		eui.panel:Show()
+		for _, wrapper in pairs(eui.wrappers) do wrapper:Hide() end
+		local wrapper = eui.wrappers[pageName]
+		if wrapper then
+			wrapper:Show()
+			module.onPageCacheRestore(pageName)
+		else
+			wrapper = M.newWidget("Frame", nil, eui.panel)
+			eui.wrappers[pageName] = wrapper
+			eui.lastHeight = module.buildPage(pageName, wrapper, -6)
+		end
+		eui.active = pageName
+		return true
+	end
+	EllesmereUI = eui
+	M.fonts.EUIFont = true
+end
+
 if SCENARIO == "migrate" then
 	-- Saved while the addon was called DSFilter.
 	DSFilterDB = {
@@ -77,7 +111,7 @@ for line in io.lines(ADDON_DIR .. "/sFilter.toc") do
 		files[#files + 1] = line:gsub("%s+$", "")
 	end
 end
-check(#files == 11, "toc lists 11 lua files")
+check(#files == 12, "toc lists 12 lua files")
 for _, file in ipairs(files) do
 	local chunk = assert(loadfile(ADDON_DIR .. "/" .. file))
 	chunk("sFilter", ns)
@@ -157,6 +191,63 @@ end
 
 if SCENARIO == "enUS" then
 	check(ns.L["Buffs"] == "Buffs", "english fallback")
+	-- EllesmereUI's font has Latin letters only: used in English, not in Russian.
+	ns.Skin.eui = { GetFontPath = function() return "EUIFont" end }
+	check(ns.Skin:GetFont() == "EUIFont", "EllesmereUI's font in an English client")
+	ns.Skin.eui = nil
+	return print(string.format("RESULT %s passed=%d failed=%d", SCENARIO, passed, failed))
+end
+
+if SCENARIO == "ellesmere" then
+	-- Settings inside EllesmereUI's panel ----------------------------------------
+	local eui = EllesmereUI
+	local O = ns.Options
+	local spec = eui.plugins.sFilter
+	local module = spec and spec.modules[1]
+	check(spec and spec.label == "sFilter" and #spec.modules == 1 and ns.Ellesmere:IsActive(), "registered as an EllesmereUI plugin")
+	check(module and #module.pages == 4 and module.pages[1] == ns.L["Icons"] and module.searchPrebuild == false, "one module with a tab per page")
+	local r, g, b = ns.Skin:AccentColor()
+	check(r == 0.2 and g == 0.4 and b == 0.6, "EllesmereUI's accent color is used")
+	check(ns.Skin:GetFont() == STANDARD_TEXT_FONT, "Russian client keeps the game font")
+
+	SlashCmdList.SFILTER("")
+	local host = ns.Ellesmere.hosts.icons
+	check(eui.active == ns.L["Icons"] and not (O.frame and O.frame:IsShown()), "/sf opens sFilter inside EllesmereUI's panel")
+	check(host and host.__scale == 1.25 and O.pages.icons:GetParent() == host.body and O.pages.icons:IsVisible(), "icons page shown in its tab")
+	check(eui.lastHeight > O.PAGE_HEIGHT, "tab reports its content height")
+	check(#O.iconList.__rows == #ns.profile.icons, "icon list filled inside EllesmereUI")
+	local inTab = 0
+	for _, button in ipairs(O.unlockButtons) do
+		if button:GetParent() == host then inTab = inTab + 1 end
+	end
+	check(inTab == 1, "unlock button in the tab")
+
+	O:Show("groups", "proc")
+	local groupsHost = ns.Ellesmere.hosts.groups
+	check(eui.active == ns.L["Groups"] and O.pages.groups:GetParent() == groupsHost.body and O.selectedGroup == "proc", "group settings open on their tab")
+	check(#O.groupList.__rows == #ns.profile.groups, "group list filled inside EllesmereUI")
+	ns:SetUnlocked(true)
+	local following = #O.unlockButtons == 3
+	for _, button in ipairs(O.unlockButtons) do
+		following = following and button:GetText() == ns.L["Lock groups"]
+	end
+	check(following, "unlock buttons in every tab follow the state")
+	ns:SetUnlocked(false)
+
+	-- In combat the panel cannot open: sFilter's own window takes the page.
+	M.inCombat = true
+	O:Show("icons")
+	check(O.frame:IsShown() and O.pages.icons:GetParent() == O.frame and O.pages.icons:IsVisible(), "in combat the page opens in sFilter's window")
+	M.inCombat = false
+	O.frame:Hide()
+	O:Show("icons")
+	check(O.pages.icons:GetParent() == host.body and not O.frame:IsShown(), "the cached tab takes the page back")
+
+	-- EllesmereUI's search pass builds pages with no side effects.
+	eui.prebuild = true
+	local height = module.buildPage(ns.L["Cooldown Manager"], M.newWidget("Frame", nil, UIParent), -6)
+	eui.prebuild = false
+	check(type(height) == "number" and ns.Ellesmere.hosts.cdm == nil, "search pre-build pass builds nothing")
 	return print(string.format("RESULT %s passed=%d failed=%d", SCENARIO, passed, failed))
 end
 if SCENARIO ~= "retail" then
@@ -652,6 +743,20 @@ check(not debuffFrame.mover:IsShown() and not D.grid:IsShown(), "lock hides move
 local O = ns.Options
 O:Show("icons")
 check(O.frame:IsShown(), "options shown")
+if SCENARIO == "elvui" then
+	check(not O.unlockButton.sfFlat and not O.navButtons.icons.navMark, "ElvUI skins the window, not the EllesmereUI style")
+else
+	local font = O.unlockButton.__normalFont
+	check(O.unlockButton.sfFlat and font and font.__color[4] == 0.7 and O.unlockButton.__disabledFont.__color[4] == 0.3, "buttons in EllesmereUI's flat style")
+	check(O.navButtons.icons.navMark:IsShown() and not O.navButtons.groups.navMark:IsShown() and not O.navButtons.icons:IsEnabled(), "sidebar marks the open page")
+	O.navButtons.groups.__scripts.OnClick(O.navButtons.groups)
+	check(O.navButtons.groups.navMark:IsShown() and not O.navButtons.icons.navMark:IsShown() and O.pages.groups:IsShown(), "sidebar switches pages")
+	O.navButtons.icons.__scripts.OnClick(O.navButtons.icons)
+	check(O.iconEditor.disabled.sfFlat and O.iconEditor.unit.sfFlat and O.iconEditor.spells.sfFlat, "checkboxes, dropdowns and edit boxes restyled")
+	local r, g, b = ns.Skin:AccentColor()
+	local accent = game == "forever" and { 220 / 255, 167 / 255, 127 / 255 } or { 12 / 255, 210 / 255, 157 / 255 }
+	check(math.abs(r - accent[1]) + math.abs(g - accent[2]) + math.abs(b - accent[3]) < 1e-6, "EllesmereUI's default accent for this client")
+end
 check(#O.iconList.__rows == #ns.profile.icons, "icon rows")
 O.iconList.__rows[2].__scripts.OnClick(O.iconList.__rows[2])
 check(O.selectedIcon == ns.profile.icons[2], "row click selects")

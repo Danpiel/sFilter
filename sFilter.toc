@@ -3,11 +3,11 @@
 ## Notes: Shows the debuffs on your target and the buffs on you and your pet that matter for your rotation.
 ## Notes-ruRU: Показывает нужные дебаффы на цели и баффы на себе/пете для оптимального урона.
 ## Author: Danpiel (based on sFilter by Nils Ruesch and ALZA)
-## Version: 10.0.0
+## Version: 10.1.0
 ## Category: Combat
 ## IconTexture: Interface\Icons\Spell_Nature_FaerieFire
 ## SavedVariables: sFilterDB, DSFilterDB
-## OptionalDeps: ElvUI
+## OptionalDeps: ElvUI, EllesmereUI
 ## AddonCompartmentFunc: sFilter_OnAddonCompartmentClick
 ## AddonCompartmentFuncOnEnter: sFilter_OnAddonCompartmentEnter
 ## AddonCompartmentFuncOnLeave: sFilter_OnAddonCompartmentLeave
@@ -23,3 +23,4 @@ Display.lua
 NativeAuras.lua
 CDMBridge.lua
 Options.lua
+Ellesmere.lua

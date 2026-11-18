@@ -47,7 +47,7 @@ for _, name in ipairs({
 	"SetDesaturated", "SetColorTexture", "SetAtlas", "SetJustifyH", "SetTextColor", "SetWordWrap",
 	"SetReverse", "SetDrawEdge", "SetHideCountdownNumbers", "SetAutoFocus", "SetNumeric", "HighlightText",
 	"SetFocus", "ClearFocus", "SetSpacing", "SetBackdrop", "SetBackdropColor", "SetBackdropBorderColor",
-	"SetEnabled", "AddLine", "SetOwner", "SetTextInsets", "SetVertexColor", "StartMoving",
+	"AddLine", "SetOwner", "SetTextInsets", "SetVertexColor", "StartMoving",
 	"StopMovingOrSizing", "SetElementExtent", "SetDrawBling", "SetBlendMode",
 }) do
 	Widget[name] = noop
@@ -120,6 +120,38 @@ function Widget:GetTexture() return self.__texture end
 function Widget:GetFrameLevel() return self.__level end
 function Widget:SetFrameLevel(l) self.__level = l end
 function Widget:GetParent() return self.__parent end
+function Widget:SetParent(parent)
+	local old = self.__parent
+	if old == parent then return end
+	if old then
+		local list = (self.__kind == "Texture" or self.__kind == "FontString") and old.__regions or old.__children
+		for i = #list, 1, -1 do
+			if list[i] == self then table.remove(list, i) end
+		end
+	end
+	self.__parent = parent
+	if parent then
+		table.insert((self.__kind == "Texture" or self.__kind == "FontString") and parent.__regions or parent.__children, self)
+	end
+end
+function Widget:IsVisible()
+	local frame = self
+	while frame do
+		if not frame.__shown then return false end
+		frame = frame.__parent
+	end
+	return true
+end
+function Widget:SetEnabled(enabled) self.__enabled = enabled and true or false end
+function Widget:IsEnabled() return self.__enabled ~= false end
+-- Buttons: font objects per state and the label FontString.
+function Widget:SetNormalFontObject(font) self.__normalFont = font end
+function Widget:SetHighlightFontObject(font) self.__highlightFont = font end
+function Widget:SetDisabledFontObject(font) self.__disabledFont = font end
+function Widget:GetFontString()
+	self.__fontString = self.__fontString or newWidget("FontString", nil, self)
+	return self.__fontString
+end
 function Widget:GetName() return self.__name end
 function Widget:GetChildren() return unpack(self.__children) end
 function Widget:GetRegions() return unpack(self.__regions) end
@@ -301,6 +333,18 @@ function M.Install(env)
 	env.WOW_PROJECT_ID = M.toc == 120100 and 1 or 99
 	env.GetLocale = function() return M.locale or "ruRU" end
 	env.STANDARD_TEXT_FONT = "Fonts\\FRIZQT___CYR.TTF"
+	env.CreateFont = function(name)
+		local font = { __name = name }
+		function font:SetFont(path, size)
+			if not M.fonts[path] then return false end
+			self.__path, self.__size = path, size
+			return true
+		end
+		function font:GetFont() return self.__path, self.__size end
+		function font:SetTextColor(r, g, b, a) self.__color = { r, g, b, a } end
+		if name then env[name] = font end
+		return font
+	end
 	env.GameFontHighlight = "GameFontHighlight"
 	env.strtrim = function(s) return (s:gsub("^%s+", ""):gsub("%s+$", "")) end
 	env.wipe = function(t) for k in pairs(t) do t[k] = nil end return t end

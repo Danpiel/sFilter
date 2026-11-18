@@ -1,5 +1,7 @@
 -- Settings window: icons, groups, profile export/import and Cooldown Manager status.
--- Built from stock Blizzard templates; Skin.lua restyles every widget when ElvUI is loaded.
+-- Built from stock Blizzard templates; Skin.lua restyles every widget (EllesmereUI's look, or
+-- ElvUI's when ElvUI is loaded). With EllesmereUI installed the same pages are shown inside its
+-- settings panel instead (Ellesmere.lua); this window then opens only where that panel cannot.
 
 local _, ns = ...
 local L = ns.L
@@ -13,7 +15,12 @@ local Profile = ns.Profile
 
 local WIDTH, HEIGHT = 800, 580
 local NAV_WIDTH = 150
+local HEADER_HEIGHT = 38
 local PAGES = { "icons", "groups", "profile", "cdm" }
+-- Size of a page; Ellesmere.lua lays EllesmereUI's tabs out for it.
+Options.PAGE_WIDTH, Options.PAGE_HEIGHT = WIDTH - NAV_WIDTH - 26, HEIGHT - 58
+Options.PAGES = PAGES
+Options.PAGE_TITLES = { icons = L["Icons"], groups = L["Groups"], profile = L["Export / Import"], cdm = L["Cooldown Manager"] }
 
 local UNIT_LABELS = { player = L["Me"], target = L["Target"], pet = L["Pet"], focus = L["Focus"] }
 local FILTER_LABELS = { HELPFUL = L["Buff"], HARMFUL = L["Debuff"] }
@@ -311,6 +318,7 @@ function Options:Create()
 	frame:SetScript("OnDragStop", frame.StopMovingOrSizing)
 	frame:Hide()
 	Skin:Window(frame)
+	Skin:WindowChrome(frame, HEADER_HEIGHT, NAV_WIDTH)
 	tinsert(UISpecialFrames, frame:GetName())
 	self.frame = frame
 
@@ -324,43 +332,40 @@ function Options:Create()
 	close:SetPoint("TOPRIGHT", -2, -2)
 	Skin:CloseButton(close)
 
-	self.unlockButton = Button(frame, L["Unlock groups"], 150, function()
-		ns:ToggleUnlocked()
-	end)
-	self.unlockButton:SetPoint("TOPRIGHT", -36, -10)
+	self.unlockButton = self:CreateUnlockButton(frame)
+	self.unlockButton:SetPoint("TOPRIGHT", -36, -8)
 
-	-- Navigation.
+	-- Navigation: a sidebar of page names, as in EllesmereUI's panel.
 	self.navButtons = {}
-	local navLabels = { icons = L["Icons"], groups = L["Groups"], profile = L["Export / Import"], cdm = L["Cooldown Manager"] }
 	local previous
 	for _, page in ipairs(PAGES) do
-		local button = Button(frame, navLabels[page], NAV_WIDTH - 10, function()
-			Options:Show(page)
+		local button = CreateFrame("Button", nil, frame, "UIPanelButtonTemplate")
+		button:SetSize(NAV_WIDTH - 2, 28)
+		button:SetText(Options.PAGE_TITLES[page])
+		button:SetScript("OnClick", function()
+			Options:ShowStandalone(page)
 		end)
-		button:SetHeight(26)
+		Skin:NavButton(button)
 		if previous then
-			button:SetPoint("TOPLEFT", previous, "BOTTOMLEFT", 0, -4)
+			button:SetPoint("TOPLEFT", previous, "BOTTOMLEFT", 0, -2)
 		else
-			button:SetPoint("TOPLEFT", 12, -46)
+			button:SetPoint("TOPLEFT", 1, -HEADER_HEIGHT - 8)
 		end
 		previous = button
 		self.navButtons[page] = button
 	end
 
-	local classText = Text(frame, "", 11, "GameFontNormalSmall")
+	local classText = self:CreateProfileText(frame)
 	classText:SetPoint("BOTTOMLEFT", 14, 12)
 	classText:SetWidth(NAV_WIDTH - 14)
-	local className = (LOCALIZED_CLASS_NAMES_MALE and LOCALIZED_CLASS_NAMES_MALE[ns.playerClass]) or ns.playerClass
-	classText:SetText(L["Profile:"] .. "\n" .. className)
 
 	-- Pages.
 	self.pages = {}
 	for _, page in ipairs(PAGES) do
 		local container = CreateFrame("Frame", nil, frame)
-		container:SetPoint("TOPLEFT", NAV_WIDTH + 12, -46)
-		container:SetPoint("BOTTOMRIGHT", -14, 12)
 		container:Hide()
 		self.pages[page] = container
+		self:AttachPage(page, frame)
 	end
 
 	self:BuildIconsPage(self.pages.icons)
@@ -369,22 +374,90 @@ function Options:Create()
 	self:BuildCDMPage(self.pages.cdm)
 end
 
+-- The unlock button and the profile line exist in this window and in every EllesmereUI tab.
+function Options:CreateUnlockButton(parent)
+	local button = Button(parent, ns.unlocked and L["Lock groups"] or L["Unlock groups"], 150, function()
+		ns:ToggleUnlocked()
+	end)
+	self.unlockButtons = self.unlockButtons or {}
+	table.insert(self.unlockButtons, button)
+	return button
+end
+
+function Options:CreateProfileText(parent)
+	local text = Text(parent, "", 11, "GameFontNormalSmall")
+	text:SetTextColor(1, 1, 1, 0.55)
+	local className = (LOCALIZED_CLASS_NAMES_MALE and LOCALIZED_CLASS_NAMES_MALE[ns.playerClass]) or ns.playerClass
+	text:SetText(L["Profile:"] .. " " .. (className or "?"))
+	return text
+end
+
+-- Moves a page into this window (host = self.frame) or into a tab of EllesmereUI's panel.
+function Options:AttachPage(page, host)
+	local container = self.pages[page]
+	if container:GetParent() ~= host then
+		container:SetParent(host)
+	end
+	container:ClearAllPoints()
+	if host == self.frame then
+		container:SetPoint("TOPLEFT", NAV_WIDTH + 12, -HEADER_HEIGHT - 8)
+		container:SetPoint("BOTTOMRIGHT", -14, 12)
+	else
+		container:SetAllPoints(host)
+	end
+end
+
+-- Opens the settings: inside EllesmereUI's panel when it is installed and can open (not in
+-- combat), otherwise in this window.
 function Options:Show(page, groupKey)
-	self:Create()
 	if page then
 		self.page = page
 	end
 	if groupKey then
 		self.selectedGroup = groupKey
 	end
+	if ns.Ellesmere and ns.Ellesmere:Open(self.page) then
+		return
+	end
+	self:ShowStandalone()
+end
+
+function Options:ShowStandalone(page)
+	self:Create()
+	if page then
+		self.page = page
+	end
+	self.embedded = nil
 	for name, container in pairs(self.pages) do
+		self:AttachPage(name, self.frame)
 		container:SetShown(name == self.page)
 	end
 	for name, button in pairs(self.navButtons) do
 		button:SetEnabled(name ~= self.page)
+		Skin:SetNavSelected(button, name == self.page)
 	end
 	self.frame:Show()
 	self:Refresh()
+end
+
+-- Shows a page in a tab of EllesmereUI's panel (host is the frame Ellesmere.lua made there).
+function Options:ShowEmbedded(page, host)
+	self:Create()
+	if self.frame:IsShown() then
+		self.frame:Hide()
+	end
+	self.page = page
+	self.embedded = host
+	self:AttachPage(page, host)
+	self.pages[page]:Show()
+	self:Refresh()
+end
+
+function Options:IsOpen()
+	if self.frame and self.frame:IsShown() then
+		return true
+	end
+	return self.embedded ~= nil and self.embedded:IsVisible()
 end
 
 function Options:Toggle()
@@ -396,10 +469,12 @@ function Options:Toggle()
 end
 
 function Options:Refresh()
-	if not (self.frame and self.frame:IsShown()) then
+	if not self:IsOpen() then
 		return
 	end
-	self.unlockButton:SetText(ns.unlocked and L["Lock groups"] or L["Unlock groups"])
+	for _, button in ipairs(self.unlockButtons or {}) do
+		button:SetText(ns.unlocked and L["Lock groups"] or L["Unlock groups"])
+	end
 	if self.page == "icons" then
 		self:RefreshIcons()
 	elseif self.page == "groups" then
@@ -470,8 +545,8 @@ local function SetupSpellRow(row, item)
 		end)
 		row.source:SetHeight(18)
 		row.source:SetPoint("RIGHT", -2, 0)
-		row.source:SetScript("OnEnter", ShowSourceTooltip)
-		row.source:SetScript("OnLeave", HideTooltip)
+		row.source:HookScript("OnEnter", ShowSourceTooltip)
+		row.source:HookScript("OnLeave", HideTooltip)
 		row.text = Text(row, "", 11, "GameFontNormalSmall")
 		row.text:SetPoint("LEFT", 4, 0)
 		row.text:SetPoint("RIGHT", row.source, "LEFT", -4, 0)

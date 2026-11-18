@@ -16,7 +16,7 @@ for name in sorted(os.listdir(addon)):
             print("SYNTAX", name, err)
             failed = True
 
-for scenario in ["forever", "elvui", "retail", "enUS", "legacy", "migrate"]:
+for scenario in ["forever", "elvui", "retail", "enUS", "legacy", "migrate", "ellesmere"]:
     lua = lupa.LuaRuntime()
     g = lua.globals()
     g.TEST_DIR = here
